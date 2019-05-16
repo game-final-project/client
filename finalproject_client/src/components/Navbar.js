@@ -9,12 +9,14 @@ class Navbar extends Component {
                     <NavLink to="/" style={{ color: 'black' }} className="brand-logo center">Bomb's Away <span role="img" aria-label="bomb">💣</span></NavLink>
                     <ul id="nav-mobile" className="left hide-on-med-and-down">
                         <li>
-                            <a className="modal-trigger" data-target="registerModal" style={{ color: 'black' }}>Register</a>
+                            <a href="#" className="modal-trigger" data-target="registerModal" style={{ color: 'black' }}>Register</a>
                         </li>
                         <li>
-                            <a className="modal-trigger" data-target="loginModal" style={{ color: 'black' }}>Login</a>
+                            <a href="#" className="modal-trigger" data-target="loginModal" style={{ color: 'black' }}>Login</a>
                         </li>
-                        <li><a href="collapsible.html" style={{ color: 'black' }}>Leaderboard</a></li>
+                        <li>
+                            <NavLink to="/WebcamTest" href="#" style={{ color: 'black' }}>Webcam (TEST)</NavLink>
+                        </li>
                     </ul>
                 </div>
             </nav>

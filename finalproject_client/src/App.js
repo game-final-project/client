@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 // LIST OF PAGES
 import Home from './containers/Home'
+import WebcamTest from './containers/WebcamTest'
 
 // MODALS
 import Register from './components/Register'
@@ -18,7 +19,7 @@ function App() {
         <header className="App-header">
           <Switch>
             <Route exact path="/" component={Home} />
-
+            <Route exact path="/WebcamTest" component={WebcamTest} />
           </Switch>
           <Register />
           <Login />
