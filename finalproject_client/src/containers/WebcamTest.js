@@ -86,10 +86,10 @@ export default class WebcamTest extends Component {
                 <h4>{this.state.accuracy}</h4>
                 <video autoPlay playsInline muted id="webcam" width="500" height="500"></video>
                 <br/>
-                <a id="class-a" class="waves-effect waves-teal btn">UP</a>
-                <a id="class-b" class="waves-effect waves-teal btn">RIGHT</a>
-                <a id="class-c" class="waves-effect waves-teal btn">DOWN</a>
-                <a id="class-d" class="waves-effect waves-teal btn">LEFT</a>
+                <a href="_blank" id="class-a" class="waves-effect waves-teal btn">UP</a>
+                <a href="_blank" id="class-b" class="waves-effect waves-teal btn">RIGHT</a>
+                <a href="_blank" id="class-c" class="waves-effect waves-teal btn">DOWN</a>
+                <a href="_blank" id="class-d" class="waves-effect waves-teal btn">LEFT</a>
             </div>
         )
     }

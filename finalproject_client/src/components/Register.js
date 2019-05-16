@@ -45,7 +45,7 @@ export default class Register extends Component {
                         <div>
                             <h6 style={{ color: 'black' }}>
                                 Already have an account?
-                                <a className="modal-trigger modal-close btn" data-target="loginModal" style={{ marginLeft: '8px' }}>Login</a>
+                                <a href="_blank" className="modal-trigger modal-close btn" data-target="loginModal" style={{ marginLeft: '8px' }}>Login</a>
                             </h6>
                         </div>
                         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
