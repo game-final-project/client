@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import * as tf from '@tensorflow/tfjs';
 import * as mobilenet from '@tensorflow-models/mobilenet';
 import * as knnClassifier from '@tensorflow-models/knn-classifier';
-import P5Wrapper from 'react-p5-wrapper' 
+import P5Wrapper from 'react-p5-wrapper'
 import sketch from './gameboard/js/main'
 
 
@@ -86,19 +86,20 @@ export default class WebcamTest extends Component {
         const { direction } = this.state
         return (
             <>
+                <div style={{ marginTop: '15px' }}>
+                    <P5Wrapper direction={direction} sketch={sketch} />
+                </div>
                 <div>
-                    <h4>{this.state.direction}</h4>
-                    <h4>{this.state.accuracy}</h4>
-                    <video autoPlay playsInline muted id="webcam" width="500" height="500"></video>
+                    <h6>{this.state.direction}</h6>
+                    <h6>{this.state.accuracy}</h6>
+                    <video autoPlay playsInline muted id="webcam" width="200" height="200"></video>
                     <br />
                     <a href="_blank" onClick={(event) => event.preventDefault()} id="class-a" className="waves-effect waves-teal btn">UP</a>
-                    <a href="_blank" onClick={(event) => event.preventDefault()} id="class-b" className="waves-effect waves-teal btn">RIGHT</a>
-                    <a href="_blank" onClick={(event) => event.preventDefault()} id="class-c" className="waves-effect waves-teal btn">DOWN</a>
-                    <a href="_blank" onClick={(event) => event.preventDefault()} id="class-d" className="waves-effect waves-teal btn">LEFT</a>
+                    <a href="_blank" style={{ marginLeft: '5px' }} onClick={(event) => event.preventDefault()} id="class-b" className="waves-effect waves-teal btn">RIGHT</a>
+                    <a href="_blank" style={{ marginLeft: '5px' }} onClick={(event) => event.preventDefault()} id="class-c" className="waves-effect waves-teal btn">DOWN</a>
+                    <a href="_blank" style={{ marginLeft: '5px' }} onClick={(event) => event.preventDefault()} id="class-d" className="waves-effect waves-teal btn">LEFT</a>
                 </div>
-                <div className="test" >
-                <P5Wrapper direction={direction} sketch={sketch} />
-                </div>
+                <br />
             </>
         )
     }
