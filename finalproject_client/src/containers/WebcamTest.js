@@ -85,11 +85,11 @@ export default class WebcamTest extends Component {
     render() {
         const { direction } = this.state
         return (
-            <>
-                <div style={{ marginTop: '15px' }}>
+            <div className="row">
+                <div style={{ marginTop: '15px' }} className="col">
                     <P5Wrapper direction={direction} sketch={sketch} />
                 </div>
-                <div>
+                <div className="col">
                     <h6>{this.state.direction}</h6>
                     <h6>{this.state.accuracy}</h6>
                     <video autoPlay playsInline muted id="webcam" width="200" height="200"></video>
@@ -100,7 +100,7 @@ export default class WebcamTest extends Component {
                     <a href="_blank" style={{ marginLeft: '5px' }} onClick={(event) => event.preventDefault()} id="class-d" className="waves-effect waves-teal btn">LEFT</a>
                 </div>
                 <br />
-            </>
+            </div>
         )
     }
 }
