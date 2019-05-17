@@ -85,11 +85,11 @@ export default class WebcamTest extends Component {
                 <h4>{this.state.direction}</h4>
                 <h4>{this.state.accuracy}</h4>
                 <video autoPlay playsInline muted id="webcam" width="500" height="500"></video>
-                <br/>
-                <a href="_blank" id="class-a" class="waves-effect waves-teal btn">UP</a>
-                <a href="_blank" id="class-b" class="waves-effect waves-teal btn">RIGHT</a>
-                <a href="_blank" id="class-c" class="waves-effect waves-teal btn">DOWN</a>
-                <a href="_blank" id="class-d" class="waves-effect waves-teal btn">LEFT</a>
+                <br />
+                <a href="_blank" onClick={(event) => event.preventDefault()} id="class-a" className="waves-effect waves-teal btn">UP</a>
+                <a href="_blank" onClick={(event) => event.preventDefault()} id="class-b" className="waves-effect waves-teal btn">RIGHT</a>
+                <a href="_blank" onClick={(event) => event.preventDefault()} id="class-c" className="waves-effect waves-teal btn">DOWN</a>
+                <a href="_blank" onClick={(event) => event.preventDefault()} id="class-d" className="waves-effect waves-teal btn">LEFT</a>
             </div>
         )
     }
