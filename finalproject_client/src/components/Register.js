@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
+import { register } from '../store/actions/userActions'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
-export default class Register extends Component {
+class Register extends Component {
     state = {
         username: '',
         email: '',
@@ -14,13 +17,18 @@ export default class Register extends Component {
     }
 
     handleSubmit = (event) => {
+        const { username, email, password } = this.state
         event.preventDefault()
-        this.setState({
-            [event.target.name]: event.target.value
-        })
+        this.props.register(username, email, password)
     }
 
     render() {
+        const { username, email, password } = this.state
+
+        if(this.props.token) {
+            this.props.history.push('/WebcamTest');
+        }
+
         return (
             <div id="registerModal" className="modal">
                 <div className="modal-content">
@@ -49,9 +57,24 @@ export default class Register extends Component {
                             </h6>
                         </div>
                         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                            <button className="btn waves-effect waves-light" type="submit" name="action">Submit
-                            <i className="material-icons right">send</i>
-                            </button>
+                            {
+                                (
+                                    username !== '' &&
+                                    username !== ' ' &&
+                                    email !== '' &&
+                                    email !== ' ' &&
+                                    password !== '' &&
+                                    password !== ' '
+                                ) ? (
+                                        <button className="modal-close btn waves-effect waves-light" type="submit" name="action">Submit
+                                            <i className="material-icons right">send</i>
+                                        </button>
+                                    ) : (
+                                        <button disabled className="btn waves-effect waves-light" type="submit" name="action">Submit
+                                            <i className="material-icons right">send</i>
+                                        </button>
+                                    )
+                            }
                         </div>
                     </form>
                 </div>
@@ -59,3 +82,19 @@ export default class Register extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        token: state.token
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return ({
+        register: (username, email, password) => {
+            dispatch(register({ username, email, password }))
+        }
+    })
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Register))

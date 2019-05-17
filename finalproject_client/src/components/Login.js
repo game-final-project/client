@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
+import { login } from '../store/actions/userActions'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
-export default class Login extends Component {
+class Login extends Component {
     state = {
         email: '',
         password: ''
@@ -13,13 +16,18 @@ export default class Login extends Component {
     }
 
     handleSubmit = (event) => {
+        const { email, password } = this.state
         event.preventDefault()
-        this.setState({
-            [event.target.id]: event.target.value
-        })
+        this.props.login(email, password)
     }
 
     render() {
+        const { email, password } = this.state
+
+        if (this.props.token) {
+            this.props.history.push('/WebcamTest');
+        }
+
         return (
             <div id="loginModal" className="modal">
                 <div className="modal-content">
@@ -39,14 +47,20 @@ export default class Login extends Component {
                         </div>
                         <div>
                             <h6 style={{ color: 'black' }}>
-                               Not a member yet?
+                                Not a member yet?
                                 <a href="_blank" className="modal-trigger modal-close btn" data-target="registerModal" style={{ marginLeft: '8px' }}>Register</a>
                             </h6>
                         </div>
                         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                            <button className="btn waves-effect waves-light" type="submit" name="action">Submit
+                            {
+                                (email && password) ?
+                                    <button className="modal-close btn waves-effect waves-light" type="submit" name="action">Submit
                             <i className="material-icons right">send</i>
-                            </button>
+                                    </button> :
+                                    <button className="modal-close btn waves-effect waves-light" type="submit" name="action" disabled>Submit
+                            <i className="material-icons right">send</i>
+                                    </button>
+                            }
                         </div>
                     </form>
                 </div>
@@ -54,3 +68,19 @@ export default class Login extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        token: state.token
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return ({
+        login: (email, password) => {
+            dispatch(login({ email, password }))
+        }
+    })
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login))
