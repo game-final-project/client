@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 // LIST OF PAGES
 import Home from './containers/Home'
 import WebcamTest from './containers/WebcamTest'
+import EndGame from './containers/EndGame'
 
 // MODALS
 import Register from './components/Register'
@@ -20,6 +21,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/WebcamTest" component={WebcamTest} />
+            <Route exact path="/Endgame" component={EndGame} />
           </Switch>
           <Register />
           <Login />
