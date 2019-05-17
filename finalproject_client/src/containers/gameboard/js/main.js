@@ -69,15 +69,15 @@ export default function sketch (p) {
 
     display() {
       p.fill(255,255,0)
-      p.rect(this.x, this.y, 48, 48)
+      p.image(p.image3,this.x, this.y, 48, 48)
     }
 
     update(x) {
       if(x === 'RIGHT' && this.x <= 672) {
-        this.x += 10
+        this.x += 5
         console.log(width)
       } else if( x === 'LEFT' && this.x >= 0) {
-        this.x -= 10
+        this.x -= 5
       }
     }
   }
@@ -92,13 +92,17 @@ export default function sketch (p) {
 
   p.setup = () => {
     p.createCanvas(width, heigth)
-    // timer()
     console.log(monsters)
+    let state = false
 
     p.myCustomRedrawAccordingToNewPropsHandler = function(newProps){
       if (newProps.ready) {
         if(newProps.direction){
            direction = newProps.direction
+        }
+        if(!state) {
+          state = true
+          timer()
         }
       }
   }
