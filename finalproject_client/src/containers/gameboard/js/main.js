@@ -1,3 +1,7 @@
+import monster1 from '../images/mon1.gif'
+import monster2 from '../images/mon2.png'
+import hero1 from '../images/hero.png'
+
 export default function sketch (p) {
   const width = window.screen.width / 2
   const heigth = 400
@@ -5,21 +9,38 @@ export default function sketch (p) {
 
   const monsters = []
   const bullets = []
+  let time = 0
+  let gameOver = false
+
+  let timer = function() {
+    let interval = setInterval(() => {
+       time++
+       if(time % 10 === 0) {
+         let totalEnemy = time / 10
+         for ( let i = 0 ; i <= totalEnemy  ; i++) {
+           monsters.push(new Monster(p.random(10, width - 10)))
+         }
+       }
+       if(gameOver) {
+         clearInterval(interval)
+       }
+     }, 1000);
+   }
 
   class Monster {
-    constructor(x, y) {
+    constructor(x) {
       this.x = x
-      this.y = y
+      this.y = 10
     }
   
     display() {
       p.stroke(0, 255, 0)
       p.fill(255, 100)
-      p.ellipse( this.x, this.y, 48, 48)
+      p.image(p.image1, this.x, this.y, 48, 48)
     }
   
     update() {
-      this.y = this.y + 1
+      this.y += 0.05
     }
   }
 
@@ -36,7 +57,7 @@ export default function sketch (p) {
     }
   
     update() {
-      this.y -= 20
+      this.y -= 5
     }
   }
 
@@ -52,18 +73,27 @@ export default function sketch (p) {
     }
 
     update(x) {
-      if(x === 'RIGHT') {
-        this.x += 1
-      } else if( x === 'LEFT') {
-        this.x -= 1
+      if(x === 'RIGHT' && this.x <= 672) {
+        this.x += 10
+        console.log(width)
+      } else if( x === 'LEFT' && this.x >= 0) {
+        this.x -= 10
       }
     }
   }
 
   const hero = new Hero(width/ 2, heigth - 60)
 
+  p.preload = () => {
+    p.image1 = p.loadImage(monster1)
+    p.image2 = p.loadImage(monster2)
+    p.image3 = p.loadImage(hero1)
+  }
+
   p.setup = () => {
     p.createCanvas(width, heigth)
+    // timer()
+    console.log(monsters)
 
     p.myCustomRedrawAccordingToNewPropsHandler = function(newProps){
       if(newProps.direction){
@@ -73,14 +103,6 @@ export default function sketch (p) {
 
   }
 
-  p.mousePressed = () => {
-
-    // monsters.push(new Monster(p.random(10, width-10), 25))
-
-   
-
-    console.log(bullets)
-  }
 
   p.draw = () => {
 
@@ -88,8 +110,6 @@ export default function sketch (p) {
       bullets.push(new Bullet(hero.x + 24, hero.y))
 
     }
-
-
     p.background(0)
     monsters.forEach( (monster, idxMonster) => {
       monster.update()
