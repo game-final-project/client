@@ -1,4 +1,4 @@
-import monster1 from '../images/mon1.gif'
+import monster1 from '../images/monster.png'
 import monster2 from '../images/mon2.png'
 import hero1 from '../images/hero.png'
 
@@ -15,6 +15,7 @@ export default function sketch(p) {
 
   // game time
   let timer = function() {
+    monsters.push(new Monster(p.random(10, width - 10)))
     let interval = setInterval(() => {
       time++
       if (time % 10 === 0) {
@@ -37,8 +38,8 @@ export default function sketch(p) {
     }
 
     display() {
-      p.stroke(0, 255, 0)
-      p.fill(255, 100)
+      p.stroke(255)
+      p.fill(255)
       p.image(p.image1, this.x, this.y, 48, 48)
     }
 
@@ -83,8 +84,14 @@ export default function sketch(p) {
       } else if (x === 'LEFT' && this.x >= 0) {
         this.x -= 5
       }
+      // this.x = p.mouseX
     }
   }
+
+  // testing with mouse pressed
+  // p.mousePressed = () => {
+  //   bullets.push(new Bullet(hero.x + 24, hero.y))
+  // }
 
   const hero = new Hero(width / 2, heigth - 60)
 
@@ -128,6 +135,13 @@ export default function sketch(p) {
       gameOver = true
     }
     monsters.forEach((monster, idxMonster) => {
+      bullets.forEach( (bull, idxBull) => {
+        let d = p.dist(monster.x+24, monster.y, bull.x, bull.y)
+        if( d <= 24) {
+          monsters.splice(idxMonster, 1)
+          bullets.splice(idxBull,1)
+        }
+      })
       monster.update()
       monster.display()
       if (monster.y >= heigth) {
@@ -137,13 +151,6 @@ export default function sketch(p) {
     })
 
     bullets.forEach((bullet, bulletIdx) => {
-      monsters.forEach((mon, monIdx) => {
-        const d = p.dist(mon.x, mon.y, bullet.x, bullet.y)
-        if (d < 24) {
-          monsters.splice(monIdx, 1)
-          bullets.splice(bulletIdx, 1)
-        }
-      })
       if (bullet.y <= 0) {
         bullets.splice(bulletIdx, 1)
       }
