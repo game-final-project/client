@@ -28,7 +28,7 @@ class Register extends Component {
         if(this.props.token) {
             this.props.history.push('/WebcamTest');
         }
-        
+
         return (
             <div id="registerModal" className="modal">
                 <div className="modal-content">
