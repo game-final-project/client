@@ -19,7 +19,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
-          <Navbar {...this.props} />
+          <Navbar {...this.props} logout={() => this.props.logout()} />
           <header className="App-header">
             <Switch>
               <Route exact path="/" component={Home} />

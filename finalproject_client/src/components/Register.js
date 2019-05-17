@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { register } from '../store/actions/userActions'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 class Register extends Component {
     state = {
@@ -23,6 +24,11 @@ class Register extends Component {
 
     render() {
         const { username, email, password } = this.state
+
+        if(this.props.token) {
+            this.props.history.push('/WebcamTest');
+        }
+        
         return (
             <div id="registerModal" className="modal">
                 <div className="modal-content">
@@ -77,6 +83,12 @@ class Register extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        token: state.token
+    }
+}
+
 const mapDispatchToProps = (dispatch) => {
     return ({
         register: (username, email, password) => {
@@ -85,4 +97,4 @@ const mapDispatchToProps = (dispatch) => {
     })
 }
 
-export default connect(null, mapDispatchToProps)(Register)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Register))

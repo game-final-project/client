@@ -31,10 +31,9 @@ class Navbar extends Component {
                             {
                                 (token !== '') && (
                                     <li>
-                                        <a href="_blank" onClick={(event) => {
-                                            event.preventDefault()
+                                        <NavLink to="/" style={{ color: 'black' }} onClick={() => {
                                             this.props.logout()
-                                        }} style={{ color: 'black' }}>Logout</a>
+                                        }}>Logout</NavLink>
                                     </li>
                                 )
                             }
