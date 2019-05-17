@@ -1,7 +1,14 @@
 import React, { Component } from 'react'
 import Register from '../components/Register'
 import Login from '../components/Login'
+import M from 'materialize-css'
+
 export default class Home extends Component {
+    componentDidMount() {
+        var elems = document.querySelectorAll('.modal');
+        M.Modal.init(elems)
+    }
+
     render() {
         return (
             <>

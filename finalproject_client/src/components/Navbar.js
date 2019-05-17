@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { NavLink, withRouter } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 class Navbar extends Component {
     render() {
@@ -11,30 +12,35 @@ class Navbar extends Component {
                         <NavLink to="/" style={{ color: 'black' }} className="brand-logo center">Bomb's Away <span role="img" aria-label="bomb">💣</span></NavLink>
                         <ul id="nav-mobile" className="left hide-on-med-and-down">
                             {
-                                (token !== '') ? (
-                                    <li>
-                                        <NavLink to="/WebcamTest" style={{ color: 'black' }}>Webcam (TEST)</NavLink>
-                                    </li>
-                                ) : (
-                                        <>
-                                            <li>
-                                                <a href="_blank" className="modal-trigger" data-target="registerModal" style={{ color: 'black' }}>Register</a>
-                                            </li>
-                                            <li>
-                                                <a href="_blank" className="modal-trigger" data-target="loginModal" style={{ color: 'black' }}>Login</a>
-                                            </li>
-                                        </>
-                                    )
+                                (token !== '') ? null : (
+                                    <>
+                                        <li>
+                                            <a href="_blank" className="modal-trigger" data-target="registerModal" style={{ color: 'black' }}>Register</a>
+                                        </li>
+                                        <li>
+                                            <a href="_blank" className="modal-trigger" data-target="loginModal" style={{ color: 'black' }}>Login</a>
+                                        </li>
+                                    </>
+                                )
                             }
                         </ul>
                         <ul id="nav-mobile" className="right hide-on-med-and-down">
                             {
                                 (token !== '') && (
                                     <li>
-                                        <a href="_blank" onClick={(event) => {
-                                            event.preventDefault()
+                                        <NavLink to="/" style={{ color: 'black' }} onClick={() => {
                                             this.props.logout()
-                                        }} style={{ color: 'black' }}>Logout</a>
+                                            const Toast = Swal.mixin({
+                                                toast: true,
+                                                position: 'bottom-end',
+                                                showConfirmButton: false,
+                                                timer: 3000
+                                            });
+                                            Toast.fire({
+                                                type: 'success',
+                                                title: 'Bye!'
+                                            })
+                                        }}>Logout</NavLink>
                                     </li>
                                 )
                             }
