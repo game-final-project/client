@@ -96,8 +96,10 @@ export default function sketch (p) {
     console.log(monsters)
 
     p.myCustomRedrawAccordingToNewPropsHandler = function(newProps){
-      if(newProps.direction){
-         direction = newProps.direction
+      if (newProps.ready) {
+        if(newProps.direction){
+           direction = newProps.direction
+        }
       }
   }
 

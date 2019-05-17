@@ -10,6 +10,11 @@ export default class WebcamTest extends Component {
     state = {
         direction: '',
         accuracy: '',
+        up: false,
+        right: false,
+        down: false,
+        left: false,
+        ready: false
     }
 
     componentDidMount() {
@@ -56,6 +61,24 @@ export default class WebcamTest extends Component {
                 this.setState({
                     direction: classes[result.classIndex],
                     accuracy: result.confidences[result.classIndex]
+                }, () => {
+                    if (classes[result.classIndex] === 'UP') {
+                        this.setState({
+                            up: true
+                        })
+                    } else if (classes[result.classIndex] === 'RIGHT') {
+                        this.setState({
+                            right: true
+                        })
+                    } else if (classes[result.classIndex] === 'DOWN') {
+                        this.setState({
+                            down: true
+                        })
+                    } else if (classes[result.classIndex] === 'LEFT') {
+                        this.setState({
+                            left: true
+                        })
+                    }
                 })
             }
             await tf.nextFrame();
@@ -83,11 +106,24 @@ export default class WebcamTest extends Component {
     }
 
     render() {
-        const { direction } = this.state
+        const { direction, ready, up, right, down, left } = this.state
         return (
             <div className="row">
                 <div style={{ marginTop: '15px' }} className="col">
-                    <P5Wrapper direction={direction} sketch={sketch} />
+                    <P5Wrapper direction={direction} sketch={sketch} ready={ready} />
+                    {
+
+                        (up && right && down && left) ? (
+                            <a href="_blank" onClick={(event) => {
+                                event.preventDefault()
+                                this.setState({
+                                    ready: true
+                                })
+                            }} className="waves-effect waves-teal btn">READY</a>
+                        ) : (
+                                <a href="_blank" disabled className="waves-effect waves-teal btn">READY</a>
+                            )
+                    }
                 </div>
                 <div className="col">
                     <h6>{this.state.direction}</h6>
