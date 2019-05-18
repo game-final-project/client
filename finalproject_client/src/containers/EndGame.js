@@ -54,7 +54,7 @@ export default class endGame extends Component {
         display: 'flex',
         flexDirection: 'space-evenly'
       }}>
-        {/* <Link to="/WebcamTest" className="waves-effect waves-light btn" style={{color: 'black', position: 'absolute'}}>PLAY AGAIN </Link> */}
+        {/* <Link to="/Game" className="waves-effect waves-light btn" style={{color: 'black', position: 'absolute'}}>PLAY AGAIN </Link> */}
         {/* <Link to="/" className="waves-effect waves-light btn" style={{color: 'black', position: 'absolute'}}> HOME </Link> */}
         
         {dataList}

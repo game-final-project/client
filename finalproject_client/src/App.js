@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 
 // LIST OF PAGES
 import Home from './containers/Home'
-import WebcamTest from './containers/WebcamTest'
+import Game from './containers/Game'
 import EndGame from './containers/EndGame'
 
 class App extends Component {
@@ -24,7 +24,7 @@ class App extends Component {
           <header className="App-header">
             <Switch>
               <Route exact path="/" component={Home} />
-              <Route exact path="/WebcamTest" component={WebcamTest} />
+              <Route exact path="/Game" component={Game} />
               <Route exact path="/Endgame" component={EndGame} />
             </Switch>
           </header>

@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
-import '../../node_modules/p5/lib/addons/p5.sound'
+import 'p5/lib/addons/p5.sound'
 import * as tf from '@tensorflow/tfjs';
 import * as mobilenet from '@tensorflow-models/mobilenet';
 import * as knnClassifier from '@tensorflow-models/knn-classifier';
 import P5Wrapper from 'react-p5-wrapper'
 import sketch from './gameboard/js/main'
+import M from 'materialize-css'
+import Tutorial from '../components/Tutorial'
 
-
-export default class WebcamTest extends Component {
+export default class Game extends Component {
     state = {
         direction: '',
         accuracy: '',
@@ -19,6 +20,14 @@ export default class WebcamTest extends Component {
     }
 
     componentDidMount() {
+        var slider = document.querySelectorAll('.slider');
+        M.Slider.init(slider, {
+            indicators: false,
+            interval: 3000
+        });
+        var modal = document.querySelectorAll('.modal');
+        M.Modal.init(modal)
+
         this.app();
     }
 
@@ -110,35 +119,37 @@ export default class WebcamTest extends Component {
         const { direction, ready, up, right, down, left } = this.state
         const { replace } = this.props.history
         return (
-            <div className="row">
-                <div style={{ marginTop: '15px' }} className="col">
-                    <P5Wrapper replace={replace} direction={direction} sketch={sketch} ready={ready} />
-                    {
-
-                        (up && right && down && left) ? (
-                            <a href="_blank" onClick={(event) => {
-                                event.preventDefault()
-                                this.setState({
-                                    ready: true
-                                })
-                            }} className="waves-effect waves-teal btn">READY</a>
-                        ) : (
-                                <a href="_blank" disabled className="waves-effect waves-teal btn">READY</a>
-                            )
-                    }
-                </div>
-                <div className="col">
-                    <h6>{this.state.direction}</h6>
-                    <h6>{this.state.accuracy}</h6>
-                    <video autoPlay playsInline muted id="webcam" width="200" height="200"></video>
+            <>
+            <Tutorial/>
+                <div className="row">
+                    <div style={{ marginTop: '15px' }} className="col">
+                        <P5Wrapper replace={replace} direction={direction} sketch={sketch} ready={ready} />
+                        {
+                            (up && right && down && left) ? (
+                                <a href="_blank" onClick={(event) => {
+                                    event.preventDefault()
+                                    this.setState({
+                                        ready: true
+                                    })
+                                }} className="waves-effect waves-teal btn">READY</a>
+                            ) : (
+                                    <a href="_blank" disabled className="waves-effect waves-teal btn">READY</a>
+                                )
+                        }
+                    </div>
+                    <div className="col">
+                        <h6>{this.state.direction}</h6>
+                        <h6>{this.state.accuracy}</h6>
+                        <video autoPlay playsInline muted id="webcam" width="200" height="200"></video>
+                        <br />
+                        <a href="_blank" onClick={(event) => event.preventDefault()} id="class-a" className="waves-effect waves-teal btn">UP</a>
+                        <a href="_blank" style={{ marginLeft: '5px' }} onClick={(event) => event.preventDefault()} id="class-b" className="waves-effect waves-teal btn">RIGHT</a>
+                        <a href="_blank" style={{ marginLeft: '5px' }} onClick={(event) => event.preventDefault()} id="class-c" className="waves-effect waves-teal btn">DOWN</a>
+                        <a href="_blank" style={{ marginLeft: '5px' }} onClick={(event) => event.preventDefault()} id="class-d" className="waves-effect waves-teal btn">LEFT</a>
+                    </div>
                     <br />
-                    <a href="_blank" onClick={(event) => event.preventDefault()} id="class-a" className="waves-effect waves-teal btn">UP</a>
-                    <a href="_blank" style={{ marginLeft: '5px' }} onClick={(event) => event.preventDefault()} id="class-b" className="waves-effect waves-teal btn">RIGHT</a>
-                    <a href="_blank" style={{ marginLeft: '5px' }} onClick={(event) => event.preventDefault()} id="class-c" className="waves-effect waves-teal btn">DOWN</a>
-                    <a href="_blank" style={{ marginLeft: '5px' }} onClick={(event) => event.preventDefault()} id="class-d" className="waves-effect waves-teal btn">LEFT</a>
                 </div>
-                <br />
-            </div>
+            </>
         )
     }
 }

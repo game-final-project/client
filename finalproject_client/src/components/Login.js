@@ -25,7 +25,7 @@ class Login extends Component {
         const { email, password } = this.state
 
         if (this.props.token) {
-            this.props.history.push('/WebcamTest');
+            this.props.history.push('/Game');
         }
 
         return (

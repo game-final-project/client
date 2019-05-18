@@ -26,7 +26,7 @@ class Register extends Component {
         const { username, email, password } = this.state
 
         if(this.props.token) {
-            this.props.history.push('/WebcamTest');
+            this.props.history.push('/Game');
         }
 
         return (

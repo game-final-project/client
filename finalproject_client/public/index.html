@@ -59,6 +59,12 @@
   <script>
     $(document).ready(function () {
       $('.modal').modal();
+      if (window.location.pathname === '/Game') {
+        $('#tutorialModal').modal({
+          dismissible: false
+        });
+        $('#tutorialModal').modal('open');
+      }
     })</script>
 </body>
 
