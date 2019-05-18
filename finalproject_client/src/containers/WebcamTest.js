@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import p5 from "p5";
+import '../../node_modules/p5/lib/addons/p5.sound'
 import * as tf from '@tensorflow/tfjs';
 import * as mobilenet from '@tensorflow-models/mobilenet';
 import * as knnClassifier from '@tensorflow-models/knn-classifier';

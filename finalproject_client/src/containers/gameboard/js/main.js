@@ -1,6 +1,12 @@
 import monster1 from '../images/monster.png'
 import monster2 from '../images/mon2.png'
 import hero1 from '../images/hero.png'
+import background1 from '../images/background.png'
+import background2 from '../images/1390836051vzTCOXL.png'
+import sword1 from '../images/sword.png'
+import laser1Sound from '../sounds/laser1.wav'
+import stab1Sound from '../sounds/stab1.wav'
+
 
 export default function sketch(p) {
   const width = window.screen.width / 2
@@ -57,7 +63,7 @@ export default function sketch(p) {
     display() {
       p.stroke(255)
       p.fill(255, 0, 0)
-      p.ellipse(this.x, this.y, 2, 2)
+      p.image(p.image4 ,this.x, this.y, 20, 30)
     }
 
     update() {
@@ -80,7 +86,6 @@ export default function sketch(p) {
     update(x) {
       if (x === 'RIGHT' && this.x <= 672) {
         this.x += 5
-        console.log(width)
       } else if (x === 'LEFT' && this.x >= 0) {
         this.x -= 5
       }
@@ -90,21 +95,29 @@ export default function sketch(p) {
 
   // testing with mouse pressed
   // p.mousePressed = () => {
-  //   bullets.push(new Bullet(hero.x + 24, hero.y))
+  //   bullets.push(new Bullet(hero.x, hero.y - 20))
+  //   p.sound1.play()
   // }
 
   const hero = new Hero(width / 2, heigth - 60)
 
   p.preload = () => {
-    // preload image
+    //sounds
+    p.sound1 = new Audio(laser1Sound)
+    p.sound2 = new Audio(stab1Sound)
+
+
+    //image
     p.image1 = p.loadImage(monster1)
     p.image2 = p.loadImage(monster2)
     p.image3 = p.loadImage(hero1)
+    p.image4 = p.loadImage(sword1)
   }
 
   p.setup = () => {
     // setting canvas width and height
     p.createCanvas(width, heigth)
+    p.bg = p.loadImage(background2)
     let state = false
 
     p.myCustomRedrawAccordingToNewPropsHandler = function(newProps) {
@@ -121,6 +134,7 @@ export default function sketch(p) {
   }
 
   p.draw = () => {
+    p.background(p.bg)
     if (life <= 0) {
       gameOver = true
       p.clear()
@@ -128,8 +142,8 @@ export default function sketch(p) {
 
     if (direction === 'UP') {
       bullets.push(new Bullet(hero.x + 24, hero.y))
+      p.sound1.play()
     }
-    p.background(0)
     if (monsters.length >= 30) {
       life = 0
       gameOver = true
@@ -140,6 +154,7 @@ export default function sketch(p) {
         if( d <= 24) {
           monsters.splice(idxMonster, 1)
           bullets.splice(idxBull,1)
+          p.sound2.play()
         }
       })
       monster.update()
