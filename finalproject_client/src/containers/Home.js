@@ -5,16 +5,20 @@ import M from 'materialize-css'
 
 export default class Home extends Component {
     componentDidMount() {
-        var elems = document.querySelectorAll('.modal');
-        M.Modal.init(elems)
+        var modal = document.querySelectorAll('.modal');
+        M.Modal.init(modal)
+
+        var carousel = document.querySelectorAll('.carousel');
+        M.Carousel.init(carousel, {
+            fullWidth: true,
+            indicators: true
+        });
     }
 
     render() {
         return (
             <>
-                <div>
-                    <img alt="bomb gif" style={{ height: '200%', width: '200%' }} src="https://i.gifer.com/origin/d7/d7ac4f38b77abe73165d85edf2cbdb9e_w200.gif" />
-                </div>
+                <iframe src="https://www.youtube.com/embed/p4juj4NR3KA?autoplay=1&loop=1&controls=0&modestbranding=1&rel=0&playlist=p4juj4NR3KA" frameborder="0" height='700' width='1300' />
                 <Register {...this.props} />
                 <Login {...this.props} />
             </>
