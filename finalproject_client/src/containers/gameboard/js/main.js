@@ -1,12 +1,13 @@
 import monster1 from '../images/monster.png'
 import monster2 from '../images/mon2.png'
 import hero1 from '../images/hero.png'
-import background1 from '../images/background.png'
 import gameOver1 from '../images/gameover1.jpg'
 import background2 from '../images/1390836051vzTCOXL.png'
 import sword1 from '../images/sword.png'
 import laser1Sound from '../sounds/laser1.wav'
 import stab1Sound from '../sounds/stab1.wav'
+// import axios from 'axios'
+import heart1 from '../images/heart2.png'
 
 
 export default function sketch(p) {
@@ -14,11 +15,12 @@ export default function sketch(p) {
   const heigth = 400
   let direction = ''
   let life = 3
-
+  let swordTime = 0
   const monsters = []
   const bullets = []
   let time = 0
   let gameOver = false
+  let score = 0
 
   // game time
   let timer = function() {
@@ -40,8 +42,8 @@ export default function sketch(p) {
   //class Monster
   class Monster {
     constructor() {
-      this.x = p.random(10, width-10)
-      this.y = 10
+      this.x = p.random(30, width-30)
+      this.y = 40
     }
 
     display() {
@@ -51,10 +53,25 @@ export default function sketch(p) {
     }
 
     update() {
-      this.y += 0.5
+      this.y += 0.2
     }
   }
 
+  class Life {
+    constructor(x) {
+      this.x = x
+      this.y = 10
+    }
+
+    display() {
+      p.image(p.image6, this.x, this.y , 20 ,20)
+    }
+  }
+
+  // container for lifes
+  const totalLife = []
+
+  //Sword class
   class Bullet {
     constructor(x, y) {
       this.x = x
@@ -90,11 +107,12 @@ export default function sketch(p) {
       } else if (x === 'LEFT' && this.x >= 0) {
         this.x -= 5
       }
+      //Testing with mouse movement
       // this.x = p.mouseX
     }
   }
 
-  // testing with mouse pressed
+  // Testing with mouse pressed
   // p.mousePressed = () => {
   //   bullets.push(new Bullet(hero.x, hero.y - 20))
   //   p.sound1.play()
@@ -114,6 +132,7 @@ export default function sketch(p) {
     p.image3 = p.loadImage(hero1)
     p.image4 = p.loadImage(sword1)
     p.image5 = p.loadImage(gameOver1)
+    p.image6 = p.loadImage(heart1)
   }
 
   p.setup = () => {
@@ -138,18 +157,36 @@ export default function sketch(p) {
         }
       }
     }
+
+    for( let i = 1 ; i <= life ; i++ ) {
+      totalLife.push(new Life(i * 20) )
+    }
   }
 
   p.draw = () => {
+    // background Image
     p.background(p.bg)
+    p.textSize(32);
+    p.fill(0);
+    p.text(score, width - 80+ (score.toString().length), 30, 30);
+
+  
+    totalLife.forEach( userLife => {
+      if(life < totalLife.length) {
+        totalLife.pop()
+      }
+      userLife.display()
+    })
+
+
     if (life <= 0) {
       gameOver = true
       p.clear()
     }
 
-    if (direction === 'UP' && !gameOver) {
-      bullets.push(new Bullet(hero.x + 24, hero.y))
-      p.sound1.play()
+    if (direction === 'UP' && !gameOver && swordTime === 0) {
+        bullets.push(new Bullet(hero.x + 24, hero.y))
+        p.sound1.play()
     }
     if (monsters.length >= 30) {
       life = 0
@@ -168,6 +205,7 @@ export default function sketch(p) {
           monsters.splice(idxMonster, 1)
           bullets.splice(idxBull,1)
           p.sound2.play()
+          score+= 100
         }
       })
       monster.update()
@@ -182,6 +220,7 @@ export default function sketch(p) {
       if (bullet.y <= 0) {
         bullets.splice(bulletIdx, 1)
       }
+      
       bullet.update()
       bullet.display()
     })

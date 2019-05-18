@@ -98,4 +98,29 @@ const login = (payload) => {
     }
 }
 
-export { register, login }
+const getPlayers = (payload) => {
+    return (dispatch, getState) => {
+        axios({
+            method: 'GET',
+            url: 'http://localhost:3000/users',
+            headers: {
+                token: localStorage.getItem('token'),
+            }
+        })
+            .then(({ data }) => {
+                dispatch({
+                    type: 'GET_PLAYERS',
+                    allPlayer: data
+                })
+            })
+            .catch((err) => {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Oops...',
+                    text: err.response.data.message,
+                })
+            })
+    }
+}
+
+export { register, login, getPlayers }

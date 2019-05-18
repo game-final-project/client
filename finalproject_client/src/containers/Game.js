@@ -7,8 +7,9 @@ import P5Wrapper from 'react-p5-wrapper'
 import sketch from './gameboard/js/main'
 import M from 'materialize-css'
 import Tutorial from '../components/Tutorial'
+import { connect } from 'react-redux'
 
-export default class Game extends Component {
+class WebcamTest extends Component {
     state = {
         direction: '',
         accuracy: '',
@@ -16,7 +17,8 @@ export default class Game extends Component {
         right: false,
         down: false,
         left: false,
-        ready: false
+        ready: false,
+        life: 3
     }
 
     componentDidMount() {
@@ -116,15 +118,17 @@ export default class Game extends Component {
     }
 
     render() {
-        const { direction, ready, up, right, down, left } = this.state
+        const { direction, ready, up, right, down, left, life } = this.state
         const { replace } = this.props.history
+        const { users } = this.props
         return (
             <>
-            <Tutorial/>
+                <Tutorial />
                 <div className="row">
                     <div style={{ marginTop: '15px' }} className="col">
-                        <P5Wrapper replace={replace} direction={direction} sketch={sketch} ready={ready} />
+                        <P5Wrapper users={users} replace={replace} life={life} direction={direction} sketch={sketch} ready={ready} />
                         {
+
                             (up && right && down && left) ? (
                                 <a href="_blank" onClick={(event) => {
                                     event.preventDefault()
@@ -142,14 +146,19 @@ export default class Game extends Component {
                         <h6>{this.state.accuracy}</h6>
                         <video autoPlay playsInline muted id="webcam" width="200" height="200"></video>
                         <br />
-                        <a href="_blank" onClick={(event) => event.preventDefault()} id="class-a" className="waves-effect waves-teal btn">UP</a>
-                        <a href="_blank" style={{ marginLeft: '5px' }} onClick={(event) => event.preventDefault()} id="class-b" className="waves-effect waves-teal btn">RIGHT</a>
-                        <a href="_blank" style={{ marginLeft: '5px' }} onClick={(event) => event.preventDefault()} id="class-c" className="waves-effect waves-teal btn">DOWN</a>
-                        <a href="_blank" style={{ marginLeft: '5px' }} onClick={(event) => event.preventDefault()} id="class-d" className="waves-effect waves-teal btn">LEFT</a>
                     </div>
-                    <br />
                 </div>
             </>
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        users: state
+    }
+}
+
+
+export default connect(mapStateToProps, null)(WebcamTest)
+
