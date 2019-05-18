@@ -9,7 +9,7 @@ class Navbar extends Component {
             <div className="navbar-fixed">
                 <nav style={{ backgroundColor: 'gold' }}>
                     <div className="nav-wrapper">
-                        <NavLink to="/" style={{ color: 'black' }} className="brand-logo center"> <span role="img" aria-label="sword    ">⚔️</span> Motion Slayer <span role="img" aria-label="bomb">💣</span></NavLink>
+                        <NavLink to="/" style={{ color: 'black' }} className="brand-logo center"> <span role='img' aria-label="logo"><img src={require("../assets/logo.png")} style={{height: '40px'}}></img></span><span style={{fontSize: '35px'}}>MOTION SLAYER</span></NavLink>
                         <ul id="nav-mobile" className="left hide-on-med-and-down">
                             {
                                 (token !== '') ? null : (
