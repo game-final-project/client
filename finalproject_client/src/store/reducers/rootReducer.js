@@ -3,11 +3,12 @@ const initState = {
     username: '',
     email: '',
     password: '',
-    token: ''
+    token: '',
+    allPlayer: []
 }
 
 const rootReducer = (state = initState, action) => {
-    const { id, username, email, password, token } = action
+    const { id, username, email, password, token, allPlayer } = action
     switch (action.type) {
         case "REGISTER":
             return {
@@ -36,6 +37,11 @@ const rootReducer = (state = initState, action) => {
                 email: '',
                 password: '',
                 token: ''
+            }
+        case "GET_PLAYERS":
+            return {
+                ...state,
+                allPlayer
             }
         default:
             return state
