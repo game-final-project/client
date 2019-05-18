@@ -20,7 +20,7 @@ export default class Home extends Component {
         return (
             <>
                 <div style={{
-                    minWidth: '100%'
+                    minWidth: '99%'
                 }}>
                     <video width="100%" autoPlay loop>
                         <source src={Trailer} type="video/mp4" />
