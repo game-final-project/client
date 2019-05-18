@@ -18,7 +18,7 @@ export default class Home extends Component {
     render() {
         return (
             <>
-                <iframe src="https://www.youtube.com/embed/p4juj4NR3KA?autoplay=1&loop=1&controls=0&modestbranding=1&rel=0&playlist=p4juj4NR3KA" frameborder="0" height='700' width='1300' />
+                <iframe src="https://www.youtube.com/embed/p4juj4NR3KA?autoplay=1&loop=1&controls=0&modestbranding=1&rel=0&playlist=p4juj4NR3KA" allow="autoplay" frameborder="0" height='700px' width='100%' />
                 <Register {...this.props} />
                 <Login {...this.props} />
             </>
