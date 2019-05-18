@@ -27,8 +27,8 @@ class WebcamTest extends Component {
             indicators: false,
             interval: 3000
         });
-        // document.getElementById('#tutor_button').click()
-
+        var modal = document.querySelectorAll('.modal');
+        M.Modal.init(modal)
         this.app();
     }
 
@@ -142,8 +142,8 @@ class WebcamTest extends Component {
                         <a style={{ marginLeft: '5px' }} id="tutor_button" href="_blank" data-target="tutorialModal" className="modal-trigger waves-effect waves-teal btn">TUTORIAL</a>
                     </div>
                     <div className="col">
-                        <h6>{this.state.direction}</h6>
-                        <h6>{this.state.accuracy}</h6>
+                        <h6>Direction: <span style={{ color: 'gold' }}>{this.state.direction}</span></h6>
+                        <h6>Accuracy: <span style={{ color: 'gold' }}>{this.state.accuracy}</span></h6>
                         <video autoPlay playsInline muted id="webcam" width="200" height="200"></video>
                         <br />
                         <a href="_blank" onClick={(event) => event.preventDefault()} id="class-a" className="waves-effect waves-teal btn">UP</a>
