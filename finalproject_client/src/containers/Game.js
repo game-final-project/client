@@ -27,8 +27,7 @@ class WebcamTest extends Component {
             indicators: false,
             interval: 3000
         });
-        var modal = document.querySelectorAll('.modal');
-        M.Modal.init(modal)
+        // document.getElementById('#tutor_button').click()
 
         this.app();
     }
@@ -140,6 +139,7 @@ class WebcamTest extends Component {
                                     <a href="_blank" disabled className="waves-effect waves-teal btn">READY</a>
                                 )
                         }
+                        <a style={{ marginLeft: '5px' }} id="tutor_button" href="_blank" data-target="tutorialModal" className="modal-trigger waves-effect waves-teal btn">TUTORIAL</a>
                     </div>
                     <div className="col">
                         <h6>{this.state.direction}</h6>
