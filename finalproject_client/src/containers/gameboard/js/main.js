@@ -2,6 +2,7 @@ import monster1 from '../images/monster.png'
 import monster2 from '../images/mon2.png'
 import hero1 from '../images/hero.png'
 import background1 from '../images/background.png'
+import gameOver1 from '../images/gameover1.jpg'
 import background2 from '../images/1390836051vzTCOXL.png'
 import sword1 from '../images/sword.png'
 import laser1Sound from '../sounds/laser1.wav'
@@ -112,6 +113,7 @@ export default function sketch(p) {
     p.image2 = p.loadImage(monster2)
     p.image3 = p.loadImage(hero1)
     p.image4 = p.loadImage(sword1)
+    p.image5 = p.loadImage(gameOver1)
   }
 
   p.setup = () => {
@@ -121,6 +123,11 @@ export default function sketch(p) {
     let state = false
 
     p.myCustomRedrawAccordingToNewPropsHandler = function(newProps) {
+      if(gameOver) {
+        setTimeout(() => {
+          newProps.replace('/endgame')
+        }, 5000);
+      }
       if (newProps.ready) {
         if (newProps.direction) {
           direction = newProps.direction
@@ -140,13 +147,19 @@ export default function sketch(p) {
       p.clear()
     }
 
-    if (direction === 'UP') {
+    if (direction === 'UP' && !gameOver) {
       bullets.push(new Bullet(hero.x + 24, hero.y))
       p.sound1.play()
     }
     if (monsters.length >= 30) {
       life = 0
       gameOver = true
+    }
+
+    if(gameOver) {
+      p.background(p.image5)
+      monsters.splice(0, monsters.length)
+      bullets.slice(0, bullets.length)
     }
     monsters.forEach((monster, idxMonster) => {
       bullets.forEach( (bull, idxBull) => {

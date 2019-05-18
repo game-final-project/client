@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import p5 from "p5";
 import '../../node_modules/p5/lib/addons/p5.sound'
 import * as tf from '@tensorflow/tfjs';
 import * as mobilenet from '@tensorflow-models/mobilenet';
@@ -109,10 +108,11 @@ export default class WebcamTest extends Component {
 
     render() {
         const { direction, ready, up, right, down, left } = this.state
+        const { replace } = this.props.history
         return (
             <div className="row">
                 <div style={{ marginTop: '15px' }} className="col">
-                    <P5Wrapper direction={direction} sketch={sketch} ready={ready} />
+                    <P5Wrapper replace={replace} direction={direction} sketch={sketch} ready={ready} />
                     {
 
                         (up && right && down && left) ? (
