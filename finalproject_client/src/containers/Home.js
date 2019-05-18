@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Register from '../components/Register'
 import Login from '../components/Login'
 import M from 'materialize-css'
+import Trailer from '../assets/trailer.mp4'
 
 export default class Home extends Component {
     componentDidMount() {
@@ -18,7 +19,13 @@ export default class Home extends Component {
     render() {
         return (
             <>
-                <iframe src="https://www.youtube.com/embed/p4juj4NR3KA?autoplay=1&loop=1&controls=0&modestbranding=1&rel=0&playlist=p4juj4NR3KA" allow="autoplay" frameborder="0" height='700px' width='100%' />
+                <div style={{
+                    minWidth: '100%'
+                }}>
+                    <video width="100%" autoPlay loop>
+                        <source src={Trailer} type="video/mp4" />
+                    </video>
+                </div>
                 <Register {...this.props} />
                 <Login {...this.props} />
             </>
