@@ -146,6 +146,10 @@ class WebcamTest extends Component {
                         <h6>{this.state.accuracy}</h6>
                         <video autoPlay playsInline muted id="webcam" width="200" height="200"></video>
                         <br />
+                        <a href="_blank" onClick={(event) => event.preventDefault()} id="class-a" className="waves-effect waves-teal btn">UP</a>
+                        <a href="_blank" style={{ marginLeft: '5px' }} onClick={(event) => event.preventDefault()} id="class-b" className="waves-effect waves-teal btn">RIGHT</a>
+                        <a href="_blank" style={{ marginLeft: '5px' }} onClick={(event) => event.preventDefault()} id="class-c" className="waves-effect waves-teal btn">DOWN</a>
+                        <a href="_blank" style={{ marginLeft: '5px' }} onClick={(event) => event.preventDefault()} id="class-d" className="waves-effect waves-teal btn">LEFT</a>
                     </div>
                 </div>
             </>
