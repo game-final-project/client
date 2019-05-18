@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import '../../node_modules/p5/lib/addons/p5.sound'
 import * as tf from '@tensorflow/tfjs';
 import * as mobilenet from '@tensorflow-models/mobilenet';
 import * as knnClassifier from '@tensorflow-models/knn-classifier';
 import P5Wrapper from 'react-p5-wrapper'
 import sketch from './gameboard/js/main'
+import { connect } from 'react-redux'
 
 
-export default class WebcamTest extends Component {
+class WebcamTest extends Component {
     state = {
         direction: '',
         accuracy: '',
@@ -15,7 +15,8 @@ export default class WebcamTest extends Component {
         right: false,
         down: false,
         left: false,
-        ready: false
+        ready: false,
+        life: 3
     }
 
     componentDidMount() {
@@ -107,12 +108,13 @@ export default class WebcamTest extends Component {
     }
 
     render() {
-        const { direction, ready, up, right, down, left } = this.state
+        const { direction, ready, up, right, down, left, life } = this.state
         const { replace } = this.props.history
+        const { users } = this.props
         return (
             <div className="row">
                 <div style={{ marginTop: '15px' }} className="col">
-                    <P5Wrapper replace={replace} direction={direction} sketch={sketch} ready={ready} />
+                    <P5Wrapper users={users} replace={replace} life={life} direction={direction} sketch={sketch} ready={ready} />
                     {
 
                         (up && right && down && left) ? (
@@ -142,3 +144,13 @@ export default class WebcamTest extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        users: state
+    }
+}
+
+
+export default connect(mapStateToProps, null)(WebcamTest)
+
