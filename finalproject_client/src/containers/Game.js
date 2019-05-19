@@ -22,14 +22,18 @@ class Game extends Component {
     }
 
     componentDidMount() {
-        var slider = document.querySelectorAll('.slider');
-        M.Slider.init(slider, {
-            indicators: false,
-            interval: 3000
-        });
-        var modal = document.querySelectorAll('.modal');
-        M.Modal.init(modal)
-        this.app();
+        if (!localStorage.getItem('token')) {
+            this.props.history.push('/')
+        } else {
+            var slider = document.querySelectorAll('.slider');
+            M.Slider.init(slider, {
+                indicators: false,
+                interval: 3000
+            });
+            var modal = document.querySelectorAll('.modal');
+            M.Modal.init(modal)
+            this.app();
+        }
     }
 
     app = async () => {
@@ -117,7 +121,7 @@ class Game extends Component {
     }
 
     render() {
-        const { direction, ready, up, right, down, left, life } = this.state
+        const { direction, ready, up, right, down, left, life, accuracy } = this.state
         const { replace } = this.props.history
         const { users } = this.props
         return (
@@ -127,27 +131,27 @@ class Game extends Component {
                     <div style={{ marginTop: '15px' }} className="col">
                         <P5Wrapper users={users} replace={replace} life={life} direction={direction} sketch={sketch} ready={ready} />
                         {
-                            (up && right && down && left) ? (
+                            (left && !ready) ? (
                                 <a href="_blank" onClick={(event) => {
                                     event.preventDefault()
                                     this.setState({
                                         ready: true
                                     })
-                                }} className="waves-effect waves-teal btn">READY</a>
+                                }} className="waves-teal btn">PLAY!</a>
                             ) : (
-                                    <a href="_blank" disabled className="waves-effect waves-teal btn">READY</a>
+                                    <a href="_blank" disabled className="waves-effect waves-teal btn">PLAY!</a>
                                 )
                         }
                         <a style={{ marginLeft: '5px' }} id="tutor_button" href="_blank" data-target="tutorialModal" className="modal-trigger waves-effect waves-teal btn">TUTORIAL</a>
                     </div>
                     <div className="col">
-                        <h6>Direction: <span style={{ color: 'gold' }}>{this.state.direction}</span></h6>
-                        <h6>Accuracy: <span style={{ color: 'gold' }}>{this.state.accuracy}</span></h6>
+                        <h6>Direction: <span style={{ color: 'gold' }}>{direction}</span></h6>
+                        <h6>Accuracy: <span style={{ color: 'gold' }}>{accuracy}</span></h6>
                         <video autoPlay playsInline muted id="webcam" width="200" height="200"></video>
                         <br />
                         <a href="_blank" onClick={(event) => event.preventDefault()} id="class-a" className="waves-effect waves-teal btn">UP</a>
                         {
-                            (this.state.up) ? (
+                            (up) ? (
                                 <a href="_blank" style={{ marginLeft: '5px' }} onClick={(event) => event.preventDefault()} id="class-b" className="waves-effect waves-teal btn">RIGHT</a>
                             ) : (
                                     <a href="_blank" disabled style={{ marginLeft: '5px' }} id="class-b" className="waves-effect waves-teal btn">RIGHT</a>
@@ -155,7 +159,7 @@ class Game extends Component {
                         }
 
                         {
-                            (this.state.right) ? (
+                            (right) ? (
                                 <a href="_blank" style={{ marginLeft: '5px' }} onClick={(event) => event.preventDefault()} id="class-c" className="waves-effect waves-teal btn">DOWN</a>
                             ) : (
                                     <a href="_blank" disabled style={{ marginLeft: '5px' }} id="class-c" className="waves-effect waves-teal btn">DOWN</a>
@@ -163,7 +167,7 @@ class Game extends Component {
                         }
 
                         {
-                            (this.state.down) ? (
+                            (down) ? (
                                 <a href="_blank" style={{ marginLeft: '5px' }} onClick={(event) => event.preventDefault()} id="class-d" className="waves-effect waves-teal btn">LEFT</a>
                             ) : (
                                     <a href="_blank" disabled style={{ marginLeft: '5px' }} id="class-d" className="waves-effect waves-teal btn">LEFT</a>
