@@ -25,6 +25,8 @@ class Navbar extends Component {
                             }
                             <li>
                                 <NavLink to="/aboutus" style={{ color: 'black' }}>About</NavLink>
+                            </li>
+                            <li>
                                 <NavLink to="/Leaderboard" style={{ color: 'black' }}>Leaderboard</NavLink>
                             </li>
                         </ul>

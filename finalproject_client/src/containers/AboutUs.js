@@ -14,7 +14,7 @@ export default class AboutUs extends Component {
             <div class="col s3 m3" style={{fontFamily: 'Arial'}}>
                 <div class="card yellow darken-1">
                     <div class="card-image">
-                    <img alt='memberphoto' src={require("../assets/tutorial/up.jpg")} />
+                    <img alt='memberphoto' src={require("../assets/tutorial/up.png")} />
                     <span class="card-title">Azhar Nazli</span>
                     </div>
                     <div class="card-content" style={{color: 'black', fontSize: '16px'}}> 
@@ -29,7 +29,7 @@ export default class AboutUs extends Component {
             <div class="col s3 m3" style={{fontFamily: 'Arial'}}>
                 <div class="card yellow darken-1">
                     <div class="card-image">
-                    <img alt='memberphoto' src={require("../assets/tutorial/up.jpg")} />
+                    <img alt='memberphoto' src={require("../assets/tutorial/up.png")} />
                     <span class="card-title">Reyhan Huditama</span>
                     </div>
                     <div class="card-content" style={{color: 'black', fontSize: '16px'}}> 
@@ -44,7 +44,7 @@ export default class AboutUs extends Component {
             <div class="col s3 m3" style={{fontFamily: 'Arial'}}>
                 <div class="card yellow darken-1">
                     <div class="card-image">
-                    <img alt='memberphoto' src={require("../assets/tutorial/up.jpg")} />
+                    <img alt='memberphoto' src={require("../assets/tutorial/up.png")} />
                     <span class="card-title">William Suryawan</span>
                     </div>
                     <div class="card-content" style={{color: 'black', fontSize: '16px'}}> 
@@ -59,7 +59,7 @@ export default class AboutUs extends Component {
             <div class="col s3 m3" style={{fontFamily: 'Arial'}}>
                 <div class="card yellow darken-1">
                     <div class="card-image">
-                    <img alt='memberphoto' src={require("../assets/tutorial/up.jpg")} />
+                    <img alt='memberphoto' src={require("../assets/tutorial/up.png")} />
                     <span class="card-title">Willy Prayogo</span>
                     </div>
                     <div class="card-content" style={{color: 'black', fontSize: '16px'}}> 

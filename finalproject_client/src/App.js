@@ -7,7 +7,6 @@ import { connect } from 'react-redux'
 // LIST OF PAGES
 import Home from './containers/Home'
 import Game from './containers/Game'
-import EndGame from './containers/EndGame'
 import AboutUs from './containers/AboutUs'
 import Leaderboard from './containers/Leaderboard'
 
@@ -27,7 +26,6 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/Game" component={Game} />
-              <Route exact path="/Endgame" component={EndGame} />
               <Route exact path="/aboutus" component={AboutUs} />
               <Route exact path="/Leaderboard" component={Leaderboard} />
             </Switch>
