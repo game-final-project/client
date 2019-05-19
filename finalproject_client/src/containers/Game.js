@@ -3,6 +3,7 @@ import 'p5/lib/addons/p5.sound'
 import * as tf from '@tensorflow/tfjs';
 import * as mobilenet from '@tensorflow-models/mobilenet';
 import * as knnClassifier from '@tensorflow-models/knn-classifier';
+import * as speechCommands from '@tensorflow-models/speech-commands'
 import P5Wrapper from 'react-p5-wrapper'
 import sketch from './gameboard/js/main'
 import M from 'materialize-css'
@@ -18,7 +19,11 @@ class Game extends Component {
         down: false,
         left: false,
         ready: false,
-        life: 3
+        life: 3,
+        // AUDIO TESTING
+        recognizer: speechCommands.create('BROWSER_FFT', 'directional4w'),
+        prediction: ''
+        // AUDIO TESTING
     }
 
     componentDidMount() {
@@ -37,6 +42,14 @@ class Game extends Component {
     }
 
     app = async () => {
+        // AUDIO TESTING
+        console.log('Loading audio predictor...')
+        const { recognizer } = this.state
+        await recognizer.ensureModelLoaded();
+        this.predictWord();
+        console.log('Successfully loaded audio predictor')
+        // AUDIO TESTING
+
         const classifier = knnClassifier.create();
         const webcamElement = document.getElementById('webcam');
         let net;
@@ -105,6 +118,24 @@ class Game extends Component {
         }
     }
 
+    // AUDIO TESTING
+    predictWord = () => {
+        const { recognizer } = this.state
+        // Array of words that the recognizer is trained to recognize.
+        const words = recognizer.wordLabels();
+        recognizer.listen(({ scores }) => {
+            // Turn scores into a list of (score,word) pairs.
+            scores = Array.from(scores).map((s, i) => ({ score: s, word: words[i] }));
+            // Find the most probable word.
+            scores.sort((s1, s2) => s2.score - s1.score);
+            console.log(scores[0].word.toUpperCase(), '=== PREDICTION')
+            this.setState({
+                prediction: scores[0].word.toUpperCase()
+            })
+        }, { probabilityThreshold: 0.75 });
+    }
+    // AUDIO TESTING
+
     setupWebcam = async () => {
         const webcamElement = document.getElementById('webcam');
         if (webcamElement) {
@@ -128,7 +159,7 @@ class Game extends Component {
     }
 
     render() {
-        const { direction, ready, up, right, down, left, life, accuracy } = this.state
+        const { direction, ready, up, right, down, left, life, accuracy, prediction } = this.state
         const { replace } = this.props.history
         const { users } = this.props
         return (
@@ -154,6 +185,9 @@ class Game extends Component {
                     <div className="col">
                         <h6>Direction: <span style={{ color: 'gold' }}>{direction}</span></h6>
                         <h6>Accuracy: <span style={{ color: 'gold' }}>{accuracy}</span></h6>
+                        {/* AUDIO TESTING */}
+                        <h6>Prediction: <span style={{ color: 'gold' }}>{prediction}</span></h6>
+                        {/* AUDIO TESTING */}
                         <video autoPlay playsInline muted id="webcam" width="200" height="200"></video>
                         <br />
                         <a href="_blank" onClick={(event) => event.preventDefault()} id="class-a" className="waves-effect waves-teal btn">UP</a>
