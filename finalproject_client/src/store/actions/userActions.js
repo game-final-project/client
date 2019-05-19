@@ -4,7 +4,7 @@ const baseURL = 'http://35.247.190.168'
 
 const register = (payload) => {
     return (dispatch, getState) => {
-        const { username, email, password } = payload
+        const { username, email, password, props } = payload
         axios
             .post(`${baseURL}/register`, {
                 username,
@@ -36,6 +36,7 @@ const register = (payload) => {
                     type: 'success',
                     title: 'Signed up successfully!'
                 })
+                props.history.push('/Game');
                 dispatch({
                     type: 'REGISTER',
                     email,
@@ -57,7 +58,7 @@ const register = (payload) => {
 
 const login = (payload) => {
     return (dispatch, getState) => {
-        const { email, password } = payload
+        const { email, password, props } = payload
         axios
             .post(`${baseURL}/login`, {
                 email,
@@ -80,6 +81,8 @@ const login = (payload) => {
                     type: 'success',
                     title: 'Signed In successfully!'
                 })
+
+                props.history.push('/Game');
                 dispatch({
                     type: 'REGISTER',
                     email,

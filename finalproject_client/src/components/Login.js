@@ -18,15 +18,15 @@ class Login extends Component {
     handleSubmit = (event) => {
         const { email, password } = this.state
         event.preventDefault()
-        this.props.login(email, password)
+        this.props.login(email, password, this.props)
     }
 
     render() {
         const { email, password } = this.state
 
-        if (this.props.token) {
-            this.props.history.push('/Game');
-        }
+        // if (this.props.token) {
+        //     this.props.history.push('/Game');
+        // }
 
         return (
             <div id="loginModal" className="modal">
@@ -77,8 +77,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return ({
-        login: (email, password) => {
-            dispatch(login({ email, password }))
+        login: (email, password, props) => {
+            dispatch(login({ email, password, props }))
         }
     })
 }

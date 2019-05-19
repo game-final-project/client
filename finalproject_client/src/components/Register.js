@@ -19,15 +19,15 @@ class Register extends Component {
     handleSubmit = (event) => {
         const { username, email, password } = this.state
         event.preventDefault()
-        this.props.register(username, email, password)
+        this.props.register(username, email, password, this.props)
     }
 
     render() {
         const { username, email, password } = this.state
 
-        if(this.props.token) {
-            this.props.history.push('/Game');
-        }
+        // if(this.props.token) {
+        //     this.props.history.push('/Game');
+        // }
 
         return (
             <div id="registerModal" className="modal">
@@ -91,8 +91,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return ({
-        register: (username, email, password) => {
-            dispatch(register({ username, email, password }))
+        register: (username, email, password, props) => {
+            dispatch(register({ username, email, password, props }))
         }
     })
 }
