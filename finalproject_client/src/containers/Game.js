@@ -9,7 +9,7 @@ import M from 'materialize-css'
 import Tutorial from '../components/Tutorial'
 import { connect } from 'react-redux'
 
-class WebcamTest extends Component {
+class Game extends Component {
     state = {
         direction: '',
         accuracy: '',
@@ -183,5 +183,5 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, null)(WebcamTest)
+export default connect(mapStateToProps, null)(Game)
 

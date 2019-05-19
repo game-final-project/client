@@ -23,6 +23,9 @@ class Navbar extends Component {
                                     </>
                                 )
                             }
+                            <li>
+                                <NavLink to="/Leaderboard" style={{ color: 'black' }}>Leaderboard</NavLink>
+                            </li>
                         </ul>
                         <ul id="nav-mobile" className="right hide-on-med-and-down">
                             {
