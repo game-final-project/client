@@ -60,10 +60,15 @@ class Game extends Component {
         };
 
         // When clicking a button, add an example for that class.
-        document.getElementById('class-a').addEventListener('click', () => addExample(0));
-        document.getElementById('class-b').addEventListener('click', () => addExample(1));
-        document.getElementById('class-c').addEventListener('click', () => addExample(2));
-        document.getElementById('class-d').addEventListener('click', () => addExample(3));
+        let upButton = document.getElementById('class-a')
+        let rightButton = document.getElementById('class-b')
+        let downButton = document.getElementById('class-c')
+        let leftButton = document.getElementById('class-d')
+
+        if (upButton) upButton.addEventListener('click', () => addExample(0));
+        if (rightButton) rightButton.addEventListener('click', () => addExample(1));
+        if (downButton) downButton.addEventListener('click', () => addExample(2));
+        if (leftButton) leftButton.addEventListener('click', () => addExample(3));
 
         while (true) {
             if (classifier.getNumClasses() > 0) {
@@ -102,22 +107,24 @@ class Game extends Component {
 
     setupWebcam = async () => {
         const webcamElement = document.getElementById('webcam');
-        return new Promise((resolve, reject) => {
-            const navigatorAny = navigator;
-            navigator.getUserMedia = navigator.getUserMedia ||
-                navigatorAny.webkitGetUserMedia || navigatorAny.mozGetUserMedia ||
-                navigatorAny.msGetUserMedia;
-            if (navigator.getUserMedia) {
-                navigator.getUserMedia({ video: true },
-                    stream => {
-                        webcamElement.srcObject = stream;
-                        webcamElement.addEventListener('loadeddata', () => resolve(), false);
-                    },
-                    error => reject());
-            } else {
-                reject();
-            }
-        });
+        if (webcamElement) {
+            return new Promise((resolve, reject) => {
+                const navigatorAny = navigator;
+                navigator.getUserMedia = navigator.getUserMedia ||
+                    navigatorAny.webkitGetUserMedia || navigatorAny.mozGetUserMedia ||
+                    navigatorAny.msGetUserMedia;
+                if (navigator.getUserMedia) {
+                    navigator.getUserMedia({ video: true },
+                        stream => {
+                            webcamElement.srcObject = stream;
+                            webcamElement.addEventListener('loadeddata', () => resolve(), false);
+                        },
+                        error => reject());
+                } else {
+                    reject();
+                }
+            });
+        }
     }
 
     render() {
