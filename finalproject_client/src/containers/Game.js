@@ -73,19 +73,19 @@ class WebcamTest extends Component {
                     direction: classes[result.classIndex],
                     accuracy: result.confidences[result.classIndex]
                 }, () => {
-                    if (classes[result.classIndex] === 'UP') {
+                    if (classes[result.classIndex] === 'UP' && result.confidences[result.classIndex] === 1) {
                         this.setState({
                             up: true
                         })
-                    } else if (classes[result.classIndex] === 'RIGHT') {
+                    } else if (classes[result.classIndex] === 'RIGHT' && result.confidences[result.classIndex] === 1) {
                         this.setState({
                             right: true
                         })
-                    } else if (classes[result.classIndex] === 'DOWN') {
+                    } else if (classes[result.classIndex] === 'DOWN' && result.confidences[result.classIndex] === 1) {
                         this.setState({
                             down: true
                         })
-                    } else if (classes[result.classIndex] === 'LEFT') {
+                    } else if (classes[result.classIndex] === 'LEFT' && result.confidences[result.classIndex] === 1) {
                         this.setState({
                             left: true
                         })
@@ -127,7 +127,6 @@ class WebcamTest extends Component {
                     <div style={{ marginTop: '15px' }} className="col">
                         <P5Wrapper users={users} replace={replace} life={life} direction={direction} sketch={sketch} ready={ready} />
                         {
-
                             (up && right && down && left) ? (
                                 <a href="_blank" onClick={(event) => {
                                     event.preventDefault()
@@ -147,9 +146,29 @@ class WebcamTest extends Component {
                         <video autoPlay playsInline muted id="webcam" width="200" height="200"></video>
                         <br />
                         <a href="_blank" onClick={(event) => event.preventDefault()} id="class-a" className="waves-effect waves-teal btn">UP</a>
-                        <a href="_blank" style={{ marginLeft: '5px' }} onClick={(event) => event.preventDefault()} id="class-b" className="waves-effect waves-teal btn">RIGHT</a>
-                        <a href="_blank" style={{ marginLeft: '5px' }} onClick={(event) => event.preventDefault()} id="class-c" className="waves-effect waves-teal btn">DOWN</a>
-                        <a href="_blank" style={{ marginLeft: '5px' }} onClick={(event) => event.preventDefault()} id="class-d" className="waves-effect waves-teal btn">LEFT</a>
+                        {
+                            (this.state.up) ? (
+                                <a href="_blank" style={{ marginLeft: '5px' }} onClick={(event) => event.preventDefault()} id="class-b" className="waves-effect waves-teal btn">RIGHT</a>
+                            ) : (
+                                    <a href="_blank" disabled style={{ marginLeft: '5px' }} id="class-b" className="waves-effect waves-teal btn">RIGHT</a>
+                                )
+                        }
+
+                        {
+                            (this.state.right) ? (
+                                <a href="_blank" style={{ marginLeft: '5px' }} onClick={(event) => event.preventDefault()} id="class-c" className="waves-effect waves-teal btn">DOWN</a>
+                            ) : (
+                                    <a href="_blank" disabled style={{ marginLeft: '5px' }} id="class-c" className="waves-effect waves-teal btn">DOWN</a>
+                                )
+                        }
+
+                        {
+                            (this.state.down) ? (
+                                <a href="_blank" style={{ marginLeft: '5px' }} onClick={(event) => event.preventDefault()} id="class-d" className="waves-effect waves-teal btn">LEFT</a>
+                            ) : (
+                                    <a href="_blank" disabled style={{ marginLeft: '5px' }} id="class-d" className="waves-effect waves-teal btn">LEFT</a>
+                                )
+                        }
                     </div>
                 </div>
             </>
