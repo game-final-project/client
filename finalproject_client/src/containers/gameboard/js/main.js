@@ -16,8 +16,7 @@ import bossSound from '../sounds/arggh1.wav'
 //backsound
 import backgroundSound from '../sounds/backsound1.mp3'
 
-// import axios from 'axios'
-
+import axios from 'axios'
 
 
 export default function sketch(p) {
@@ -32,6 +31,7 @@ export default function sketch(p) {
   let time = 0
   let gameOver = false
   let score = 0
+  const baseUrl = 'http://35.247.190.168'
 
   // game time
   let timer = function() {
@@ -47,7 +47,7 @@ export default function sketch(p) {
       if(time % 15 === 0) {
         monsters.push( new Monster2(p.random(10, width - 10)))
       }
-      if(time % 16 === 0) {
+      if(time % 20 === 0) {
         bosses.push( new Boss(p.random(10, width - 10)))
       }
       if (gameOver) {
@@ -72,7 +72,7 @@ export default function sketch(p) {
     }
 
     update() {
-      this.y += 0.2
+      this.y += 0.05
     }
   }
 
@@ -91,7 +91,7 @@ export default function sketch(p) {
     }
 
     update() {
-      this.y += 0.7
+      this.y += 0.8
     }
   }
 
@@ -101,7 +101,7 @@ export default function sketch(p) {
       this.y = 40
       this.name = 'boss'
       this.health = 30
-      this.score = 10000
+      this.score = 2000
     }
 
     display() {
@@ -210,20 +210,49 @@ export default function sketch(p) {
     p.bg = p.loadImage(background2)
     let state = false
 
-    p.myCustomRedrawAccordingToNewPropsHandler = function(newProps) {
-      if(gameOver) {
-        setTimeout(() => {
-          newProps.replace('/Leaderboard')
-        }, 5000);
-      }
-      if (newProps.ready) {
-        if (newProps.direction) {
-          direction = newProps.direction
+    console.log(p)
+
+    p.myCustomRedrawAccordingToNewPropsHandler = async (newProps) => {
+      try {
+        if(gameOver) {
+          let state = false
+          let myScore = localStorage.getItem('score')
+          console.log(myScore)
+          console.log(score)
+          if(score > myScore && !state) {
+            state = true
+            let data = await axios({
+              method: 'put',
+              url: baseUrl + '/users/' + localStorage.getItem('id'),
+              data: {
+                username : localStorage.getItem('username'),
+                email : localStorage.getItem('email'),
+                password : localStorage.getItem('password'),
+                score : score
+              },
+              headers: {
+                token: localStorage.getItem('token')
+              }
+            })
+            await localStorage.setItem('score', score)
+          }
+          setTimeout(() => {
+            p.sound3.pause()
+            p.sound3.currentTime = 0
+            newProps.replace('/Leaderboard')
+          }, 3000);
         }
-        if (!state) {
-          state = true
-          timer()
+        if (newProps.ready) {
+          if (newProps.direction) {
+            direction = newProps.direction
+          }
+          if (!state) {
+            state = true
+            timer()
+          }
         }
+      } catch (error) {
+        console.log(error)
       }
     }
 
@@ -235,9 +264,17 @@ export default function sketch(p) {
   p.draw = () => {
     // background Image
     p.background(p.bg)
+    p.textFont('Bangers')
+    p.textSize(16)
+    p.fill(0)
+    p.text('Monsters : ' + monsters.length, 20, 60)
+
+    p.textFont(32)
+    p.text(time, width/2, 30)
+
     p.textSize(32);
     p.fill(0);
-    p.text(score, width - 80 - (score.toString().length * 10), 30, 30);
+    p.text('score : ' + score, width - 50 - (score.toString().length * 10), 30);
 
   
     totalLife.forEach( userLife => {
@@ -249,6 +286,7 @@ export default function sketch(p) {
 
 
     if (life <= 0) {
+      bosses.splice(0)
       gameOver = true
       p.clear()
     }
@@ -288,6 +326,7 @@ export default function sketch(p) {
     bosses.forEach( (bos, idx) => {
       if (bos.y >= heigth - 20) {
         bosses.splice(idx, 1)
+        life--
       }
       bullets.forEach((bull, jdx) => {
         let d = p.dist(bos.x+48, bos.y, bull.x, bull.y) 
@@ -295,12 +334,13 @@ export default function sketch(p) {
           bos.health -= 1
           bullets.splice(jdx, 1)
           p.sound4.play()
+          if(bos.health <= 0) {
+            score += bos.score
+            bosses.splice(idx, 1)
+          }
         } 
-        if(bos.health <= 0) {
-          score += bos.score
-          bosses.splice(idx, 1)
-        }
       })
+
       bos.update()
       bos.display()
     })
