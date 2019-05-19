@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { getPlayers } from '../store/actions/userActions'
 import { connect } from 'react-redux'
 
-class endGame extends Component {
+class Leaderboard extends Component {
   componentDidMount() {
     this.props.getPlayers()
   }
@@ -71,4 +71,4 @@ const mapDispatchToProps = (dispatch) => {
   })
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(endGame);
+export default connect(mapStateToProps, mapDispatchToProps)(Leaderboard);

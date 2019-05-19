@@ -213,7 +213,7 @@ export default function sketch(p) {
     p.myCustomRedrawAccordingToNewPropsHandler = function(newProps) {
       if(gameOver) {
         setTimeout(() => {
-          newProps.replace('/endgame')
+          newProps.replace('/Leaderboard')
         }, 5000);
       }
       if (newProps.ready) {
