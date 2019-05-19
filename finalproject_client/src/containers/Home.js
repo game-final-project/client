@@ -8,12 +8,9 @@ export default class Home extends Component {
     componentDidMount() {
         var modal = document.querySelectorAll('.modal');
         M.Modal.init(modal)
-
-        var carousel = document.querySelectorAll('.carousel');
-        M.Carousel.init(carousel, {
-            fullWidth: true,
-            indicators: true
-        });
+        if (localStorage.getItem('token')) {
+            this.props.history.push('/Game')
+        }
     }
 
     render() {

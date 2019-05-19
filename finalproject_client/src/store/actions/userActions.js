@@ -1,11 +1,12 @@
 import axios from 'axios'
 import Swal from 'sweetalert2'
+const baseURL = 'http://35.247.190.168'
 
 const register = (payload) => {
     return (dispatch, getState) => {
-        const { username, email, password } = payload
+        const { username, email, password, props } = payload
         axios
-            .post('http://localhost:3000/register', {
+            .post(`${baseURL}/register`, {
                 username,
                 email,
                 password
@@ -13,7 +14,7 @@ const register = (payload) => {
             .then(({ data }) => {
                 console.log(data, '=== REGISTERED USER')
                 return axios
-                    .post('http://localhost:3000/login', {
+                    .post(`${baseURL}/login`, {
                         email,
                         password
                     })
@@ -23,6 +24,7 @@ const register = (payload) => {
                 localStorage.setItem('password', password)
                 localStorage.setItem('username', data.username)
                 localStorage.setItem('id', data.id)
+                localStorage.setItem('score', data.score)
                 localStorage.setItem('token', data.token)
                 const { id, token } = data
                 const Toast = Swal.mixin({
@@ -35,6 +37,7 @@ const register = (payload) => {
                     type: 'success',
                     title: 'Signed up successfully!'
                 })
+                props.history.push('/Game');
                 dispatch({
                     type: 'REGISTER',
                     email,
@@ -56,9 +59,9 @@ const register = (payload) => {
 
 const login = (payload) => {
     return (dispatch, getState) => {
-        const { email, password } = payload
+        const { email, password, props } = payload
         axios
-            .post('http://localhost:3000/login', {
+            .post(`${baseURL}/login`, {
                 email,
                 password
             })
@@ -67,6 +70,7 @@ const login = (payload) => {
                 localStorage.setItem('password', password)
                 localStorage.setItem('username', data.username)
                 localStorage.setItem('id', data.id)
+                localStorage.setItem('score', data.score)
                 localStorage.setItem('token', data.token)
                 const { id, token } = data
                 const Toast = Swal.mixin({
@@ -79,6 +83,8 @@ const login = (payload) => {
                     type: 'success',
                     title: 'Signed In successfully!'
                 })
+
+                props.history.push('/Game');
                 dispatch({
                     type: 'REGISTER',
                     email,
@@ -102,7 +108,7 @@ const getPlayers = (payload) => {
     return (dispatch, getState) => {
         axios({
             method: 'GET',
-            url: 'http://localhost:3000/users',
+            url: `${baseURL}/users`,
             headers: {
                 token: localStorage.getItem('token'),
             }
