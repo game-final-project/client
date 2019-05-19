@@ -17,14 +17,14 @@ class Leaderboard extends Component {
     const { allPlayer } = this.props
 
     const dataList = allPlayer.length ? (
-      <table className="highlight" style={{ background: 'gold', margin: '1', borderRadius: '10px', color: 'black' }}>
-        <thead>
+      <table className="responsive-table highlight" style={{ color: 'black' }}>
+        <thead style={{ background: 'gold' }}>
           <tr>
             <th>Name</th>
             <th>Score </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody style={{ backgroundColor: 'whitesmoke' }}>
           {
             allPlayer.map((user, index) => {
               return (
@@ -42,10 +42,7 @@ class Leaderboard extends Component {
       <>
         <Register {...this.props} />
         <Login {...this.props} />
-        <div style={{
-          display: 'flex',
-          flexDirection: 'space-evenly'
-        }}>
+        <div style={{ minWidth: '70%' }}>
           {dataList}
         </div>
         <div style={{
