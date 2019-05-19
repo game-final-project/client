@@ -12,7 +12,7 @@ class endGame extends Component {
     const { allPlayer } = this.props
 
     const dataList = allPlayer.length ? (
-      <table className="highlight" style={{ background: 'yellow', margin: '1', color: 'black' }}>
+      <table className="highlight" style={{ background: 'gold', margin: '1', borderRadius: '10px', color: 'black' }}>
         <thead>
           <tr>
             <th>Name</th>
@@ -46,8 +46,10 @@ class endGame extends Component {
           flexDirection: 'space-evenly',
           marginTop: '20px'
         }}>
-          <Link to="/" className="waves-effect waves-light btn" style={{ marginRight: '10px' }}>Play Again </Link>
-          <Link to="/" className="waves-effect waves-light btn"> Back to Home </Link>
+          {
+            localStorage.getItem('token') &&
+            <Link to="/Game" className="waves-effect waves-light btn">Play Again </Link>
+          }
         </div>
 
       </>
