@@ -78,6 +78,38 @@ export default function sketch(p) {
     }
   }
 
+  class Particle {
+    constructor( x, y ) {
+      this.x = x
+      this.y = y
+      this.time = 0
+    }
+
+    lifeTime() {
+      this.time++
+    }
+  
+    display() {
+      p.fill(255, 0, 0)
+      p.stroke(255, 0, 0)
+      p.rect(this.x, this.y, 1 ,1)
+    }
+
+    update(dirX, dirY) {
+      if(dirX === 'plus') {
+        this.x += 5
+      } else if(dirX === 'minus') {
+        this.x += -5
+      }
+
+      if(dirY === 'plus') {
+        this.y += 5
+      } else if(dirY === 'minus') {
+        this.y += -5
+      }
+    }
+  }
+
   //class Monster
   class Monster {
     constructor() {
@@ -88,8 +120,6 @@ export default function sketch(p) {
     }
 
     display() {
-      p.stroke(255)
-      p.fill(255)
       p.image(p.image1, this.x, this.y, 48, 48)
     }
 
@@ -161,6 +191,10 @@ export default function sketch(p) {
 
   //container drop Life
   const dropLife = []
+
+
+  //container particles 
+  const particles = []
 
   //Sword class
   class Bullet {
@@ -287,8 +321,18 @@ export default function sketch(p) {
     }
   }
 
+  const randomNumber = (min, max) => {
+    return Math.floor(Math.random()* (max - min + 1) ) + min
+  }
+
+  const randomDirection = () => {
+    const direction = ['plus', 'minus']
+    return direction[randomNumber(0, direction.length)]
+  }
+
   p.draw = () => {
     // background Image
+
     p.background(p.bg)
     p.textFont('Bangers')
     p.textSize(16)
@@ -302,7 +346,26 @@ export default function sketch(p) {
     p.fill(0);
     p.text('score : ' + score, width - 50 - (score.toString().length * 10), 30);
 
-  
+
+    //start here
+    particles.forEach( (part, idx) => {
+      monsters.forEach( (mon, monIdx) => {
+        let d = p.dist(part.x, part.y ,mon.x+24, mon.y)
+        if( d < 24) {
+          particles.splice(idx, 1)
+          score += mon.score
+          monsters.splice(monIdx, 1)
+        }
+      })
+
+      part.update(randomDirection(), randomDirection())
+      part.lifeTime()
+      part.display()
+      if(part.time >= 25) {
+        particles.splice(idx, 1)
+      }
+    })
+
     totalLife.forEach( userLife => {
       if(life < totalLife.length) {
         totalLife.pop()
@@ -311,7 +374,6 @@ export default function sketch(p) {
     })
 
     dropLife.forEach( (lifeEl, lifeIdx) => {
-      console.log(lifeEl)
       let d = p.dist(hero.x, hero.y, lifeEl.x, lifeEl.y)
 
       if(d < 20) {
@@ -331,10 +393,16 @@ export default function sketch(p) {
       p.clear()
     }
 
-    if (direction === 'UP' && !gameOver && swordTime === 0) {
-        bullets.push(new Bullet(hero.x + 24, hero.y))
-        p.sound1.play()
+    
+    let range = new Date()
+    let n = range.getMilliseconds()
+    if( n % 2 === 0) {
+      if (direction === 'UP' && !gameOver && swordTime === 0) {
+          bullets.push(new Bullet(hero.x + 24, hero.y))
+          p.sound1.play()
+      }
     }
+
     if (monsters.length >= 30) {
       life = 0
       gameOver = true
@@ -353,6 +421,9 @@ export default function sketch(p) {
           score += monster.score
           p.sound2.play()
           bullets.splice(idxBull,1)
+          for ( let i = 0 ; i < 50 ; i++) {
+            particles.push(new  Particle(monster.x + 24 , monster.y))
+          }
         }
       })
       monster.update()
