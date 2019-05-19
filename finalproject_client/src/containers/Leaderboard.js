@@ -2,10 +2,15 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { getPlayers } from '../store/actions/userActions'
 import { connect } from 'react-redux'
+import Register from '../components/Register'
+import Login from '../components/Login'
+import M from 'materialize-css'
 
 class Leaderboard extends Component {
   componentDidMount() {
     this.props.getPlayers()
+    var modal = document.querySelectorAll('.modal');
+    M.Modal.init(modal)
   }
 
   render() {
@@ -35,6 +40,8 @@ class Leaderboard extends Component {
     ) : (<p>No Post Yet</p>)
     return (
       <>
+        <Register {...this.props} />
+        <Login {...this.props} />
         <div style={{
           display: 'flex',
           flexDirection: 'space-evenly'
