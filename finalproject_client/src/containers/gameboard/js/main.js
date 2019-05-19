@@ -12,6 +12,7 @@ import monsterBoss1 from '../images/mon1.gif'
 import laser1Sound from '../sounds/laser1.wav'
 import stab1Sound from '../sounds/stab1.wav'
 import bossSound from '../sounds/arggh1.wav'
+import healthSound1 from '../sounds/health1.wav'
 
 //backsound
 import backgroundSound from '../sounds/backsound1.mp3'
@@ -50,10 +51,31 @@ export default function sketch(p) {
       if(time % 20 === 0) {
         bosses.push( new Boss(p.random(10, width - 10)))
       }
+      if(time % 60 === 0 ) {
+        dropLife.push( new LifeDrop(p.random(10, width - 10)))
+      }
+
       if (gameOver) {
         clearInterval(interval)
       }
     }, 1000)
+  }
+
+  // class LifeDrop
+
+  class LifeDrop {
+    constructor(x) {
+      this.x = x
+      this.y = 60
+    }
+
+    display() {
+      p.image(p.image6, this.x, this.y , 50 ,50)
+    }
+
+    update() {
+      this.y += 3
+    }
   }
 
   //class Monster
@@ -137,6 +159,9 @@ export default function sketch(p) {
   // container for lifes
   const totalLife = []
 
+  //container drop Life
+  const dropLife = []
+
   //Sword class
   class Bullet {
     constructor(x, y) {
@@ -191,6 +216,7 @@ export default function sketch(p) {
     p.sound2 = new Audio(stab1Sound)
     p.sound3 = new Audio(backgroundSound)
     p.sound4 = new Audio(bossSound)
+    p.sound5 = new Audio(healthSound1)
 
 
     //image
@@ -284,6 +310,20 @@ export default function sketch(p) {
       userLife.display()
     })
 
+    dropLife.forEach( (lifeEl, lifeIdx) => {
+      console.log(lifeEl)
+      let d = p.dist(hero.x, hero.y, lifeEl.x, lifeEl.y)
+
+      if(d < 20) {
+        dropLife.splice(lifeIdx, 1)
+        life++
+        totalLife.push(new Life(life * 20))
+        p.sound5.play()
+      }
+
+      lifeEl.update()
+      lifeEl.display()
+    })
 
     if (life <= 0) {
       bosses.splice(0)
