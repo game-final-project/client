@@ -8,6 +8,9 @@ export default class Home extends Component {
     componentDidMount() {
         var modal = document.querySelectorAll('.modal');
         M.Modal.init(modal)
+        if (localStorage.getItem('token')) {
+            this.props.history.push('/Game')
+        }
     }
 
     render() {

@@ -24,6 +24,7 @@ const register = (payload) => {
                 localStorage.setItem('password', password)
                 localStorage.setItem('username', data.username)
                 localStorage.setItem('id', data.id)
+                localStorage.setItem('score', data.score)
                 localStorage.setItem('token', data.token)
                 const { id, token } = data
                 const Toast = Swal.mixin({
@@ -69,6 +70,7 @@ const login = (payload) => {
                 localStorage.setItem('password', password)
                 localStorage.setItem('username', data.username)
                 localStorage.setItem('id', data.id)
+                localStorage.setItem('score', data.score)
                 localStorage.setItem('token', data.token)
                 const { id, token } = data
                 const Toast = Swal.mixin({
