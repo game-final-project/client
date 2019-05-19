@@ -15,7 +15,7 @@ class Navbar extends Component {
                                 (token !== '') ? null : (
                                     <>
                                         <li>
-                                            <a href="_blank" className="modal-trigger" data-target="registerModal" style={{ color: 'black' }}>Register</a>
+                                            <a href="_blank" className="modal-trigger" data-target="registerModal" style={{ color: 'black'}}>Register</a>
                                         </li>
                                         <li>
                                             <a href="_blank" className="modal-trigger" data-target="loginModal" style={{ color: 'black' }}>Login</a>
@@ -23,6 +23,9 @@ class Navbar extends Component {
                                     </>
                                 )
                             }
+                            <li>
+                                <NavLink to="/aboutus" style={{ color: 'black' }}>About</NavLink>
+                            </li>
                         </ul>
                         <ul id="nav-mobile" className="right hide-on-med-and-down">
                             {

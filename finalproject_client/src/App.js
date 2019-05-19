@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 import Home from './containers/Home'
 import Game from './containers/Game'
 import EndGame from './containers/EndGame'
+import AboutUs from './containers/AboutUs'
 
 class App extends Component {
   componentDidMount() {
@@ -26,6 +27,7 @@ class App extends Component {
               <Route exact path="/" component={Home} />
               <Route exact path="/Game" component={Game} />
               <Route exact path="/Endgame" component={EndGame} />
+              <Route exact path="/aboutus" component={AboutUs} />
             </Switch>
           </header>
         </div>
