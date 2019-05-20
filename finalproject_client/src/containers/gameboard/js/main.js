@@ -37,7 +37,7 @@ export default function sketch(p) {
   let score = 0
   const baseUrl = 'http://35.247.190.168'
   let bosKill = 0
-  let particleReady = 10
+  let particleReady = 0
 
   // variable for shoot game
   let shoot = false
@@ -83,7 +83,7 @@ export default function sketch(p) {
     }
 
     update() {
-      this.y += 3
+      this.y += 2.2
     }
   }
 
@@ -133,7 +133,7 @@ export default function sketch(p) {
     }
 
     update() {
-      this.y += 0.05
+      this.y += 0.09
     }
   }
 
@@ -152,7 +152,7 @@ export default function sketch(p) {
     }
 
     update() {
-      this.y += 0.8
+      this.y += 1
     }
   }
 
@@ -167,7 +167,7 @@ export default function sketch(p) {
     }
 
     update() {
-      this.y -= 1
+      this.y -= 2
     }
   }
 
@@ -206,7 +206,7 @@ export default function sketch(p) {
         this.x += p.random(-5, 5)
       }
 
-      this.y += 0.07
+      this.y += 0.12
     }
   }
 
@@ -495,7 +495,7 @@ export default function sketch(p) {
       }
     }
 
-    if (monsters.length >= 30) {
+    if (monsters.length >= 60) {
       life = 0
       gameOver = true
     }
