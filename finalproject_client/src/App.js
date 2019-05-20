@@ -9,6 +9,7 @@ import Home from './containers/Home'
 import Game from './containers/Game'
 import AboutUs from './containers/AboutUs'
 import Leaderboard from './containers/Leaderboard'
+import NotFound from './containers/NotFound'
 
 class App extends Component {
   componentDidMount() {
@@ -28,6 +29,7 @@ class App extends Component {
               <Route exact path="/Game" component={Game} />
               <Route exact path="/AboutUs" component={AboutUs} />
               <Route exact path="/Leaderboard" component={Leaderboard} />
+              <Route component={NotFound} />
             </Switch>
           </header>
         </div>
