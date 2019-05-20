@@ -192,7 +192,7 @@ class Game extends Component {
                             sketch={sketch}
                             ready={ready}
                             prediction={prediction}
-                            resetState={() => this.setState({ prediction: 'DOWN' })}
+                            resetState={() => this.setState({ prediction: 'DOWN', particle: particle - 1 })}
                             setParticle={async () => await this.setState({ particle: particle + 1 })}
                         />
                         {

@@ -38,6 +38,7 @@ export default function sketch(p) {
   let score = 0
   const baseUrl = 'http://35.247.190.168'
   let bosKill = 0
+  let totalEnemy = 1
   let particleReady = 0
 
   // variable for shoot game
@@ -50,8 +51,8 @@ export default function sketch(p) {
     let interval = setInterval(() => {
       time++
       if (time % 7 === 0) {
-        let totalEnemy = time / 10
-        for (let i = 0; i <= totalEnemy; i++) {
+        totalEnemy++
+        for (let i = 0; i < totalEnemy; i++) {
           monsters.push(new Monster(p.random(10, width - 10)))
         }
       }
@@ -280,15 +281,15 @@ export default function sketch(p) {
         this.x -= 5
       }
       //Testing with mouse movement
-      // this.x = p.mouseX
+      this.x = p.mouseX
     }
   }
 
   // Testing with mouse pressed
-  // p.mousePressed = () => {
-  // bullets.push(new Bullet(hero.x, hero.y - 20))
+  p.mousePressed = () => {
+  bullets.push(new Bullet(hero.x, hero.y - 20))
   // bombsShow.pop()
-  // }
+  }
 
   const hero = new Hero(width / 2, heigth - 110)
 
