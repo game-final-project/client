@@ -37,7 +37,7 @@ export default function sketch(p) {
   let score = 0
   const baseUrl = 'http://35.247.190.168'
   let bosKill = 0
-  let particleReady = 0
+  let particleReady = 10
 
   // variable for shoot game
   let shoot = false
@@ -237,6 +237,10 @@ export default function sketch(p) {
   //container show bombs
   const bombsShow = []
 
+  for ( let i = 0 ; i < particleReady ; i++) {
+    bombsShow.push( new ShowBomb((15 * i)+ 60, 72))
+  }
+
   //Sword class
   class Bullet {
     constructor(x, y) {
@@ -268,7 +272,7 @@ export default function sketch(p) {
 
     // Hero direction with tensorflow 
     update(x) {
-      if (x === 'RIGHT' && this.x <= 672) {
+      if (x === 'RIGHT' && this.x <= width - 50) {
         this.x += 5
       } else if (x === 'LEFT' && this.x >= 0) {
         this.x -= 5
@@ -280,7 +284,8 @@ export default function sketch(p) {
 
   // Testing with mouse pressed
   // p.mousePressed = () => {
-  //   bullets.push(new Bullet(hero.x, hero.y - 20))
+    // bullets.push(new Bullet(hero.x, hero.y - 20))
+    // bombsShow.pop()
   // }
 
   const hero = new Hero(width / 2, heigth - 60)
@@ -323,8 +328,6 @@ export default function sketch(p) {
         if (gameOver) {
           let state = false
           let myScore = localStorage.getItem('score')
-          console.log(myScore)
-          console.log(score)
           if (score > myScore && !state) {
             state = true
             let data = await axios({
@@ -382,6 +385,7 @@ export default function sketch(p) {
     return direction[randomNumber(0, direction.length)]
   }
 
+
   p.draw = () => {
     // background Image
 
@@ -406,9 +410,6 @@ export default function sketch(p) {
       bomb.display()
     })
 
-    for( let indexBomb = 0; indexBomb < particleReady ; indexBomb++) {
-      bombsShow.push(new ShowBomb((15 * indexBomb)+ 65, 71))
-    }
 
     //start here
     particles.forEach((part, idx) => {
@@ -484,7 +485,8 @@ export default function sketch(p) {
         p.sound1.play()
       }
       if (shoot === true && !gameOver && particleReady >= 1) {
-        particleReady--
+        particleReady -= 1
+        console.log(particleReady)
         boms.push(new Bomb(hero.x + 24, hero.y))
         bombsShow.pop()
         p.sound1.play()
@@ -546,6 +548,7 @@ export default function sketch(p) {
             if(bosKill >= 3) {
               bosKill = 0
               particleReady++
+              bombsShow.push(new ShowBomb((15 * bombsShow.length)+ 60, 72))
             }
           }
         }
