@@ -38,7 +38,6 @@ export default function sketch(p) {
   let score = 0
   const baseUrl = 'http://35.247.190.168'
   let bosKill = 0
-  // let particleReady = 0
   let particleReady = 0
 
   // variable for shoot game
@@ -166,7 +165,7 @@ export default function sketch(p) {
     }
 
     display() {
-      p.image(p.image8, this.x, this.y , 20, 20)
+      p.image(p.image8, this.x, this.y, 20, 20)
     }
 
     update() {
@@ -175,13 +174,13 @@ export default function sketch(p) {
   }
 
   class ShowBomb {
-    constructor (x, y) {
+    constructor(x, y) {
       this.x = x
       this.y = y
     }
 
     display() {
-      p.image(p.image8, this.x , this.y, 20, 20)
+      p.image(p.image8, this.x, this.y, 20, 20)
     }
   }
 
@@ -240,8 +239,8 @@ export default function sketch(p) {
   //container show bombs
   const bombsShow = []
 
-  for ( let i = 0 ; i < particleReady ; i++) {
-    bombsShow.push( new ShowBomb((15 * i)+ 65, heigth - 28))
+  for (let i = 0; i < particleReady; i++) {
+    bombsShow.push(new ShowBomb((15 * i) + 65, heigth - 28))
   }
 
   //Sword class
@@ -273,7 +272,7 @@ export default function sketch(p) {
       p.image(p.image3, this.x, this.y, 48, 48)
     }
 
-    // Hero direction with tensorflow 
+    // Hero direction with tensorflow
     update(x) {
       if (x === 'RIGHT' && this.x <= width - 50) {
         this.x += 5
@@ -287,8 +286,8 @@ export default function sketch(p) {
 
   // Testing with mouse pressed
   // p.mousePressed = () => {
-    // bullets.push(new Bullet(hero.x, hero.y - 20))
-    // bombsShow.pop()
+  // bullets.push(new Bullet(hero.x, hero.y - 20))
+  // bombsShow.pop()
   // }
 
   const hero = new Hero(width / 2, heigth - 110)
@@ -300,9 +299,9 @@ export default function sketch(p) {
     p.sound3 = new Audio(backgroundSound)
     p.sound4 = new Audio(bossSound)
     p.sound5 = new Audio(healthSound1)
-    p.sound6 = new Audio (explodeBomb)
-    p.sound7 = new Audio (timeBomb)
-    p.sound8 = new Audio (bossCome)
+    p.sound6 = new Audio(explodeBomb)
+    p.sound7 = new Audio(timeBomb)
+    p.sound8 = new Audio(bossCome)
 
     //image
     p.image1 = p.loadImage(monster1)
@@ -313,7 +312,7 @@ export default function sketch(p) {
     p.image6 = p.loadImage(heart1)
     p.image7 = p.loadImage(monsterBoss1)
     p.image8 = p.loadImage(bombImage)
-   }
+  }
 
   p.setup = () => {
 
@@ -356,7 +355,6 @@ export default function sketch(p) {
           }, 3000);
         }
         if (newProps.ready) {
-          particleReady = newProps.particleReady
           if (newProps.direction) {
             direction = newProps.direction
           }
@@ -409,9 +407,9 @@ export default function sketch(p) {
 
     p.textSize(32)
     p.fill(0)
-    p.text( particleReady === 0 ? ('BOMB : 0') : ('BOMB : ') , 20, heigth - 10);
-    
-    bombsShow.forEach( bomb => {
+    p.text(particleReady === 0 ? ('BOMB : 0') : ('BOMB : '), 20, heigth - 10);
+
+    bombsShow.forEach(bomb => {
       bomb.display()
     })
 
@@ -452,8 +450,8 @@ export default function sketch(p) {
         p.sound5.play()
       }
 
-      if(life.y >= heigth) {
-        dropLife.splice(lifeIdx,1)
+      if (life.y >= heigth) {
+        dropLife.splice(lifeIdx, 1)
       }
 
       lifeEl.update()
@@ -466,10 +464,10 @@ export default function sketch(p) {
       p.clear()
     }
 
-    boms.forEach( (bomb, bomIdx) => {
-      monsters.forEach( (mons, idxMon)=> {
+    boms.forEach((bomb, bomIdx) => {
+      monsters.forEach((mons, idxMon) => {
         let d = p.dist(mons.x + 24, mons.y, bomb.x, bomb.y)
-        let distSound  = p.dist(mons.x + 24, mons.y , bomb.x, bomb.y - 80)
+        let distSound = p.dist(mons.x + 24, mons.y, bomb.x, bomb.y - 80)
 
         if (distSound < 24) {
           p.sound7.play()
@@ -478,12 +476,12 @@ export default function sketch(p) {
           boms.splice(bomIdx, 1)
           for (let i = 0; i < 50; i++) {
             particles.push(new Particle(mons.x + 24, mons.y))
-          }        
+          }
           p.sound6.play()
         }
       })
 
-      if(bomb.y <= 0) {
+      if (bomb.y <= 0) {
         boms.splice(bomIdx, 1)
       }
 
@@ -501,7 +499,7 @@ export default function sketch(p) {
         p.sound1.play()
       }
       if (shoot === true && !gameOver && particleReady >= 1) {
-        props.particleReadyMin()
+        particleReady--
         boms.push(new Bomb(hero.x + 24, hero.y))
         bombsShow.pop()
         p.sound1.play()
@@ -530,8 +528,8 @@ export default function sketch(p) {
           bullets.splice(idxBull, 1)
         }
 
-        let distWithHero = p.dist(monster.x + 24, monster.y, hero.x, hero.y) 
-        if( distWithHero <= 24) {
+        let distWithHero = p.dist(monster.x + 24, monster.y, hero.x, hero.y)
+        if (distWithHero <= 24) {
           life--
         }
 
@@ -561,9 +559,9 @@ export default function sketch(p) {
             score += bos.score
             bosses.splice(idx, 1)
             bosKill++
-            if(bosKill >= 1) {
+            if (bosKill >= 1) {
               bosKill = 0
-              props.particleReadyPlus()
+              particleReady++
             }
           }
         }

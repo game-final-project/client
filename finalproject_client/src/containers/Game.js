@@ -26,7 +26,6 @@ class Game extends Component {
         recognizer: speechCommands.create('BROWSER_FFT', 'directional4w'),
         prediction: '',
         // AUDIO TESTING
-        particleReady: 0,
         webcamLoading: true,
         show: 'none'
     }
@@ -128,25 +127,21 @@ class Game extends Component {
 
     // AUDIO TESTING
     predictWord = () => {
-        const { recognizer, particleReady } = this.state
+        const { recognizer } = this.state
         // Array of words that the recognizer is trained to recognize.
         const words = recognizer.wordLabels();
         recognizer.listen(({ scores }) => {
-            console.log('masukkkkkkkkkkkkkkkkkkkkkkk')
             // Turn scores into a list of (score,word) pairs.
             scores = Array.from(scores).map((s, i) => ({ score: s, word: words[i] }));
             // Find the most probable word.
             scores.sort((s1, s2) => s2.score - s1.score);
-            console.log(scores[0].word.toUpperCase(), '=== PREDICTION')
-            if(particleReady > 0) {
-                this.setState({
-                    prediction: scores[0].word.toUpperCase()
-                })
-            }
+            this.setState({
+                prediction: scores[0].word.toUpperCase()
+            })
         }, {
-            invokeCallbackOnNoiseAndUnknown: true,
-            probabilityThreshold: 0.99
-        });
+                invokeCallbackOnNoiseAndUnknown: true,
+                probabilityThreshold: 0.99
+            });
     }
     // AUDIO TESTING
 
@@ -176,7 +171,7 @@ class Game extends Component {
     }
 
     render() {
-        const { direction, ready, up, right, down, left, life, accuracy, prediction, show, particleReady } = this.state
+        const { direction, ready, up, right, down, left, life, accuracy, prediction, show } = this.state
         const { replace } = this.props.history
         const { users } = this.props
         return (
@@ -185,7 +180,7 @@ class Game extends Component {
                 <Tutorial />
                 <div className="row">
                     <div style={{ marginTop: '15px' }} className="col">
-                        <P5Wrapper users={users} replace={replace} life={life} direction={direction} sketch={sketch} ready={ready} particleReady={particleReady} prediction={prediction} resetState={() => this.setState({ prediction: 'DOWN' })} particleReadyMin={() => this.setState({ particleReady: particleReady - 1 })} particleReadyPlus={() => this.setState({ particleReady: particleReady + 1 })} />
+                        <P5Wrapper users={users} replace={replace} life={life} direction={direction} sketch={sketch} ready={ready} prediction={prediction} resetState={() => this.setState({ prediction: 'DOWN' })} />
                         {
                             (left && !ready) ? (
                                 <a href="_blank" onClick={(event) => {
