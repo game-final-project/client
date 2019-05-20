@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import Register from '../components/Register'
 import Login from '../components/Login'
 import M from 'materialize-css'
+import { relative } from 'path';
 
 class Leaderboard extends Component {
   componentDidMount() {
@@ -40,20 +41,25 @@ class Leaderboard extends Component {
     ) : (<p>No Post Yet</p>)
     return (
       <>
+        <div>
+          <img src="http://stormandsky.com/gif/16.gif" alt="background" width="100%" style={{ position: relative }} />
+        </div>
         <Register {...this.props} />
         <Login {...this.props} />
-        <div style={{ minWidth: '70%' }}>
-          <h5 style={{ color: 'whitesmoke' }}>Top 5 Players</h5>
-          {dataList}
+        <div style={{ position: "absolute", top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+          <div style={{ minWidth: '70%' }}>
+            <h5 style={{ color: 'whitesmoke' }}>Top 5 Players</h5>
+            {dataList}
+          </div>
+          {
+            localStorage.getItem('token') && (
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <h5>Your current high score: <span style={{ color: 'gold' }}>{localStorage.getItem('score')}</span> </h5>
+                <Link to="/Game" style={{ marginLeft: '15px', marginTop: '12px' }} className="pulse waves-effect waves-light btn">Play Again </Link>
+              </div>
+            )
+          }
         </div>
-        {
-          localStorage.getItem('token') && (
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <h5>Your current high score: <span style={{ color: 'gold' }}>{localStorage.getItem('score')}</span> </h5>
-              <Link to="/Game" style={{ marginLeft: '15px', marginTop: '12px' }} className="pulse waves-effect waves-light btn">Play Again </Link>
-            </div>
-          )
-        }
       </>
     )
   }
