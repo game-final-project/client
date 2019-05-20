@@ -295,7 +295,6 @@ export default function sketch(p) {
     p.sound6 = new Audio (explodeBomb)
     p.sound7 = new Audio (timeBomb)
 
-
     //image
     p.image1 = p.loadImage(monster1)
     p.image2 = p.loadImage(monster2)
@@ -308,13 +307,16 @@ export default function sketch(p) {
    }
 
   p.setup = () => {
+
+    setTimeout(() => {
+      p.sound3.play()
+    }, 2000);
+
+
     // setting canvas width and height
-    p.sound3.play()
     p.createCanvas(width, heigth)
     p.bg = p.loadImage(background2)
     let state = false
-
-    console.log(p)
 
     p.myCustomRedrawAccordingToNewPropsHandler = async (newProps) => {
       try {
