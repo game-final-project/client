@@ -132,7 +132,7 @@ class Game extends Component {
             this.setState({
                 prediction: scores[0].word.toUpperCase()
             })
-        }, { probabilityThreshold: 0.75 });
+        }, { probabilityThreshold: 0.99 });
     }
     // AUDIO TESTING
 
@@ -186,7 +186,7 @@ class Game extends Component {
                         <h6>Direction: <span style={{ color: 'gold' }}>{direction}</span></h6>
                         <h6>Accuracy: <span style={{ color: 'gold' }}>{accuracy}</span></h6>
                         {/* AUDIO TESTING */}
-                        <h6>Prediction: <span style={{ color: 'gold' }}>{prediction}</span></h6>
+                        <h6>Prediction: <span style={{ color: 'gold' }}>{(prediction === 'UP') ? (JSON.stringify(true)) : (JSON.stringify(false))}</span></h6>
                         {/* AUDIO TESTING */}
                         <video autoPlay playsInline muted id="webcam" width="200" height="200"></video>
                         <br />
