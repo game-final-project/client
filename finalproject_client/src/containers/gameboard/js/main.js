@@ -486,6 +486,7 @@ export default function sketch(p) {
       if (shoot === true && !gameOver && particleReady >= 1) {
         particleReady--
         boms.push(new Bomb(hero.x + 24, hero.y))
+        bombsShow.pop()
         p.sound1.play()
         shoot = false
         props.resetState()
