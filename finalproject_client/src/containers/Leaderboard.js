@@ -20,8 +20,8 @@ class Leaderboard extends Component {
       <table className="responsive-table highlight" style={{ color: 'black' }}>
         <thead style={{ background: 'gold' }}>
           <tr>
-            <th>Name</th>
-            <th>Score </th>
+            <th style={{ textAlign: 'center' }}>Name</th>
+            <th style={{ textAlign: 'center' }}>Score</th>
           </tr>
         </thead>
         <tbody style={{ backgroundColor: 'whitesmoke' }}>
@@ -29,8 +29,8 @@ class Leaderboard extends Component {
             allPlayer.map((user, index) => {
               return (
                 <tr key={user._id}>
-                  <td> {user.username}</td>
-                  <td> {user.score} </td>
+                  <td style={{ textAlign: 'center' }}>{user.username}</td>
+                  <td style={{ textAlign: 'center' }}>{user.score}</td>
                 </tr>
               )
             })

@@ -167,7 +167,7 @@ class Game extends Component {
                 <Tutorial />
                 <div className="row">
                     <div style={{ marginTop: '15px' }} className="col">
-                        <P5Wrapper users={users} replace={replace} life={life} direction={direction} sketch={sketch} ready={ready} />
+                        <P5Wrapper users={users} replace={replace} life={life} direction={direction} sketch={sketch} ready={ready} prediction={prediction} resetState={() => this.setState({ prediction: 'DOWN' })} />
                         {
                             (left && !ready) ? (
                                 <a href="_blank" onClick={(event) => {

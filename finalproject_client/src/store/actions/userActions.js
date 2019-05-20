@@ -108,10 +108,7 @@ const getPlayers = (payload) => {
     return (dispatch, getState) => {
         axios({
             method: 'GET',
-            url: `${baseURL}/users`,
-            headers: {
-                token: localStorage.getItem('token'),
-            }
+            url: `${baseURL}/users`
         })
             .then(({ data }) => {
                 dispatch({

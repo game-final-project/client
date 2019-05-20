@@ -34,6 +34,10 @@ export default function sketch(p) {
   let score = 0
   const baseUrl = 'http://35.247.190.168'
 
+  // variable for shoot game
+  let shoot = false
+  let props = {}
+
   // game time
   let timer = function() {
     monsters.push(new Monster(p.random(10, width - 10)))
@@ -310,6 +314,12 @@ export default function sketch(p) {
             state = true
             timer()
           }
+
+          // audio game
+          if(newProps.prediction === 'UP') {
+            shoot = true
+            props = newProps
+          }
         }
       } catch (error) {
         console.log(error)
@@ -397,10 +407,16 @@ export default function sketch(p) {
     let range = new Date()
     let n = range.getMilliseconds()
     if( n % 2 === 0) {
-      if (direction === 'UP' && !gameOver && swordTime === 0) {
-          bullets.push(new Bullet(hero.x + 24, hero.y))
-          p.sound1.play()
-      }
+      // if (direction === 'UP' && !gameOver && swordTime === 0) {
+      //     bullets.push(new Bullet(hero.x + 24, hero.y))
+      //     p.sound1.play()
+      // }
+      if (shoot === true && !gameOver && swordTime === 0) {
+        bullets.push(new Bullet(hero.x + 24, hero.y))
+        p.sound1.play()
+        shoot = false
+        props.resetState()
+    }
     }
 
     if (monsters.length >= 30) {
