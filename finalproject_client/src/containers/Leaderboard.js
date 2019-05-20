@@ -46,7 +46,7 @@ class Leaderboard extends Component {
         </div>
         <Register {...this.props} />
         <Login {...this.props} />
-        <div style={{ position: "absolute", top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+        <div style={{ position: "absolute", top: '50%', left: '50%', transform: 'translate(-50%, -50%)', minWidth: '60%' }}>
           <div style={{ minWidth: '70%' }}>
             <h5 style={{ color: 'whitesmoke' }}>Top 5 Players</h5>
             {dataList}
@@ -54,7 +54,7 @@ class Leaderboard extends Component {
           {
             localStorage.getItem('token') && (
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <h5>Your current high score: <span style={{ color: 'gold' }}>{localStorage.getItem('score')}</span> </h5>
+                <h5>Your current high score: <span style={{ color: 'black' }}>{localStorage.getItem('score')}</span> </h5>
                 <Link to="/Game" style={{ marginLeft: '15px', marginTop: '12px' }} className="pulse waves-effect waves-light btn">Play Again </Link>
               </div>
             )
