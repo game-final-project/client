@@ -12,7 +12,8 @@ import bombImage from '../images/bomb.png'
 //sound
 import laser1Sound from '../sounds/laser1.wav'
 import stab1Sound from '../sounds/stab1.wav'
-import bossSound from '../sounds/arggh1.wav'
+import bossSound from '../sounds/boss2.wav'
+import bossCome from '../sounds/bossCome.wav'
 import healthSound1 from '../sounds/health1.wav'
 import explodeBomb from '../sounds/explode1.mp3'
 import timeBomb from '../sounds/timebomb.mp3'
@@ -49,16 +50,17 @@ export default function sketch(p) {
     monsters.push(new Monster(p.random(10, width - 10)))
     let interval = setInterval(() => {
       time++
-      if (time % 10 === 0) {
+      if (time % 7 === 0) {
         let totalEnemy = time / 10
         for (let i = 0; i <= totalEnemy; i++) {
           monsters.push(new Monster(p.random(10, width - 10)))
         }
       }
-      if (time % 15 === 0) {
+      if (time % 13 === 0) {
         monsters.push(new Monster2(p.random(10, width - 10)))
       }
       if (time % 20 === 0) {
+        p.sound8.play()
         bosses.push(new Boss(p.random(10, width - 10)))
       }
       if (time % 60 === 0) {
@@ -84,7 +86,7 @@ export default function sketch(p) {
     }
 
     update() {
-      this.y += 3
+      this.y += 2.2
     }
   }
 
@@ -134,7 +136,7 @@ export default function sketch(p) {
     }
 
     update() {
-      this.y += 0.05
+      this.y += 0.09
     }
   }
 
@@ -153,7 +155,7 @@ export default function sketch(p) {
     }
 
     update() {
-      this.y += 0.8
+      this.y += 1
     }
   }
 
@@ -168,7 +170,7 @@ export default function sketch(p) {
     }
 
     update() {
-      this.y -= 1
+      this.y -= 2
     }
   }
 
@@ -207,7 +209,7 @@ export default function sketch(p) {
         this.x += p.random(-5, 5)
       }
 
-      this.y += 0.07
+      this.y += 0.12
     }
   }
 
@@ -237,6 +239,10 @@ export default function sketch(p) {
 
   //container show bombs
   const bombsShow = []
+
+  for ( let i = 0 ; i < particleReady ; i++) {
+    bombsShow.push( new ShowBomb((15 * i)+ 65, heigth - 28))
+  }
 
   //Sword class
   class Bullet {
@@ -269,7 +275,7 @@ export default function sketch(p) {
 
     // Hero direction with tensorflow 
     update(x) {
-      if (x === 'RIGHT' && this.x <= 672) {
+      if (x === 'RIGHT' && this.x <= width - 50) {
         this.x += 5
       } else if (x === 'LEFT' && this.x >= 0) {
         this.x -= 5
@@ -281,10 +287,11 @@ export default function sketch(p) {
 
   // Testing with mouse pressed
   // p.mousePressed = () => {
-  //   bullets.push(new Bullet(hero.x, hero.y - 20))
+    // bullets.push(new Bullet(hero.x, hero.y - 20))
+    // bombsShow.pop()
   // }
 
-  const hero = new Hero(width / 2, heigth - 60)
+  const hero = new Hero(width / 2, heigth - 110)
 
   p.preload = () => {
     //sounds
@@ -295,6 +302,7 @@ export default function sketch(p) {
     p.sound5 = new Audio(healthSound1)
     p.sound6 = new Audio (explodeBomb)
     p.sound7 = new Audio (timeBomb)
+    p.sound8 = new Audio (bossCome)
 
     //image
     p.image1 = p.loadImage(monster1)
@@ -326,7 +334,7 @@ export default function sketch(p) {
           let myScore = localStorage.getItem('score')
           if (score > myScore && !state) {
             state = true
-            let data = await axios({
+            await axios({
               method: 'put',
               url: baseUrl + '/users/' + localStorage.getItem('id'),
               data: {
@@ -382,6 +390,7 @@ export default function sketch(p) {
     return direction[randomNumber(0, direction.length)]
   }
 
+
   p.draw = () => {
     // background Image
 
@@ -389,7 +398,7 @@ export default function sketch(p) {
     p.textFont('Bangers')
     p.textSize(16)
     p.fill(0)
-    p.text('Monsters : ' + monsters.length, 20, 60)
+    p.text('Monsters : ' + monsters.length, 20, heigth - 30)
 
     p.textFont(32)
     p.text(time, width / 2, 30)
@@ -400,15 +409,12 @@ export default function sketch(p) {
 
     p.textSize(32)
     p.fill(0)
-    p.text( particleReady === 0 ? ('BOMB : 0') : ('BOMB : ') , 20, 90);
+    p.text( particleReady === 0 ? ('BOMB : 0') : ('BOMB : ') , 20, heigth - 10);
     
     bombsShow.forEach( bomb => {
       bomb.display()
     })
 
-    for( let indexBomb = 0; indexBomb < particleReady ; indexBomb++) {
-      bombsShow.push(new ShowBomb((15 * indexBomb)+ 65, 71))
-    }
 
     //start here
     particles.forEach((part, idx) => {
@@ -446,6 +452,10 @@ export default function sketch(p) {
         p.sound5.play()
       }
 
+      if(life.y >= heigth) {
+        dropLife.splice(lifeIdx,1)
+      }
+
       lifeEl.update()
       lifeEl.display()
     })
@@ -472,14 +482,21 @@ export default function sketch(p) {
           p.sound6.play()
         }
       })
+
+      if(bomb.y <= 0) {
+        boms.splice(bomIdx, 1)
+      }
+
       bomb.update()
       bomb.display()
     })
 
     let range = new Date()
     let n = range.getMilliseconds()
-    if (n % 2 === 0) {
+    let goShoot = true
+    if (n % 2 === 0 && goShoot) {
       if (direction === 'UP' && !gameOver && swordTime === 0) {
+        goShoot = false
         bullets.push(new Bullet(hero.x + 24, hero.y))
         p.sound1.play()
       }
@@ -493,7 +510,7 @@ export default function sketch(p) {
       }
     }
 
-    if (monsters.length >= 30) {
+    if (monsters.length >= 60) {
       life = 0
       gameOver = true
     }
@@ -516,20 +533,21 @@ export default function sketch(p) {
         let distWithHero = p.dist(monster.x + 24, monster.y, hero.x, hero.y) 
         if( distWithHero <= 24) {
           life--
-
         }
 
       })
-      monster.update()
-      monster.display()
-      if (monster.y >= heigth - 20) {
+
+      if (monster.y >= heigth - 110) {
         monsters.splice(idxMonster, 1)
         life--
       }
+
+      monster.update()
+      monster.display()
     })
 
     bosses.forEach((bos, idx) => {
-      if (bos.y >= heigth - 20) {
+      if (bos.y >= heigth - 110) {
         bosses.splice(idx, 1)
         life--
       }
@@ -543,7 +561,7 @@ export default function sketch(p) {
             score += bos.score
             bosses.splice(idx, 1)
             bosKill++
-            if(bosKill >= 3) {
+            if(bosKill >= 1) {
               bosKill = 0
               props.particleReadyPlus()
             }

@@ -10,6 +10,7 @@ import M from 'materialize-css'
 import Tutorial from '../components/Tutorial'
 import { connect } from 'react-redux'
 import HowToPlay from '../components/HowToPlay'
+import Loading from '../assets/loading.gif'
 
 class Game extends Component {
     state = {
@@ -25,7 +26,9 @@ class Game extends Component {
         recognizer: speechCommands.create('BROWSER_FFT', 'directional4w'),
         prediction: '',
         // AUDIO TESTING
-        particleReady: 0
+        particleReady: 0,
+        webcamLoading: true,
+        show: 'none'
     }
 
     componentDidMount() {
@@ -62,7 +65,10 @@ class Game extends Component {
         console.log('Sucessfully loaded model');
 
         await this.setupWebcam();
-
+        this.setState({
+            webcamLoading: false,
+            show: 'inline'
+        })
         // Reads an image from the webcam and associates it with a specific class
         // index.
         const addExample = classId => {
@@ -137,7 +143,10 @@ class Game extends Component {
                     prediction: scores[0].word.toUpperCase()
                 })
             }
-        }, { probabilityThreshold: 0.99 });
+        }, {
+            invokeCallbackOnNoiseAndUnknown: true,
+            probabilityThreshold: 0.99
+        });
     }
     // AUDIO TESTING
 
@@ -156,6 +165,9 @@ class Game extends Component {
                             webcamElement.addEventListener('loadeddata', () => resolve(), false);
                         },
                         error => reject());
+                    this.setState({
+                        webcamLoading: true
+                    })
                 } else {
                     reject();
                 }
@@ -164,7 +176,7 @@ class Game extends Component {
     }
 
     render() {
-        const { direction, ready, up, right, down, left, life, accuracy, prediction, particleReady } = this.state
+        const { direction, ready, up, right, down, left, life, accuracy, prediction, show, particleReady } = this.state
         const { replace } = this.props.history
         const { users } = this.props
         return (
@@ -192,9 +204,16 @@ class Game extends Component {
                         <h4>Direction: <span style={{ color: 'gold' }}>{direction}</span></h4>
                         <h4>Accuracy: <span style={{ color: 'gold' }}>{Number(accuracy).toFixed(2)}</span></h4>
                         {/* AUDIO TESTING */}
-                        <h4>Prediction: <span style={{ color: 'gold' }}>{(prediction === 'UP') ? (JSON.stringify(true)) : (JSON.stringify(false))}</span></h4>
+                        <h4>Bomb Command: <span style={{ color: 'gold' }}>{(prediction === 'UP') ? (JSON.stringify(true)) : (JSON.stringify(false))}</span></h4>
                         {/* AUDIO TESTING */}
-                        <video autoPlay playsInline muted id="webcam" width="237" height="200"></video>
+                        <div style={{ width: "237px", height: '200px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            {
+                                (this.state.webcamLoading) && (
+                                    <img width="137" height="100" src={Loading} alt="loading" />
+                                )
+                            }
+                            <video style={{ display: show }} autoPlay playsInline muted id="webcam" width="237" height="200"></video>
+                        </div>
                         <br />
                         <a href="_blank" onClick={(event) => event.preventDefault()} id="class-a" className="waves-effect waves-teal btn">UP</a>
                         {
