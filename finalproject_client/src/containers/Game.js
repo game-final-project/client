@@ -9,6 +9,7 @@ import sketch from './gameboard/js/main'
 import M from 'materialize-css'
 import Tutorial from '../components/Tutorial'
 import { connect } from 'react-redux'
+import HowToPlay from '../components/HowToPlay'
 
 class Game extends Component {
     state = {
@@ -164,6 +165,7 @@ class Game extends Component {
         const { users } = this.props
         return (
             <>
+                <HowToPlay />
                 <Tutorial />
                 <div className="row">
                     <div style={{ marginTop: '15px' }} className="col">
@@ -180,7 +182,7 @@ class Game extends Component {
                                     <a href="_blank" disabled className="waves-effect waves-teal btn">PLAY!</a>
                                 )
                         }
-                        <a style={{ marginLeft: '5px' }} id="tutor_button" href="_blank" data-target="tutorialModal" className="modal-trigger waves-effect waves-teal btn">TUTORIAL</a>
+                        <a style={{ marginLeft: '5px' }} id="tutor_button" href="_blank" data-target="howToPlayModal" className="modal-trigger waves-effect black btn">HOW TO PLAY</a>
                     </div>
                     <div className="col">
                         <h6>Direction: <span style={{ color: 'gold' }}>{direction}</span></h6>
@@ -214,6 +216,8 @@ class Game extends Component {
                                     <a href="_blank" disabled style={{ marginLeft: '5px' }} id="class-d" className="waves-effect waves-teal btn">LEFT</a>
                                 )
                         }
+                        <br />
+                        <a style={{ marginTop: '5px' }} id="tutor_button" href="_blank" data-target="tutorialModal" className="modal-trigger waves-effect black btn">HOW TO TRAIN</a>
                     </div>
                 </div>
             </>
