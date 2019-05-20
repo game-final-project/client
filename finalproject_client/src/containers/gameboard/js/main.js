@@ -238,7 +238,7 @@ export default function sketch(p) {
   const bombsShow = []
 
   for ( let i = 0 ; i < particleReady ; i++) {
-    bombsShow.push( new ShowBomb((15 * i)+ 60, 72))
+    bombsShow.push( new ShowBomb((15 * i)+ 65, heigth - 28))
   }
 
   //Sword class
@@ -330,7 +330,7 @@ export default function sketch(p) {
           let myScore = localStorage.getItem('score')
           if (score > myScore && !state) {
             state = true
-            let data = await axios({
+            await axios({
               method: 'put',
               url: baseUrl + '/users/' + localStorage.getItem('id'),
               data: {
@@ -557,10 +557,10 @@ export default function sketch(p) {
             score += bos.score
             bosses.splice(idx, 1)
             bosKill++
-            if(bosKill >= 3) {
+            if(bosKill >= 1) {
               bosKill = 0
               particleReady++
-              bombsShow.push(new ShowBomb((15 * bombsShow.length)+ 60, 72))
+              bombsShow.push(new ShowBomb((15 * bombsShow.length)+ 60, heigth - 28))
             }
           }
         }
