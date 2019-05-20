@@ -11,6 +11,14 @@ class Navbar extends Component {
                     <div className="nav-wrapper">
                         <NavLink to="/" style={{ color: 'black' }} className="brand-logo center"> <span role='img' aria-label="logo"><img alt="logo" src={require("../assets/logo.png")} style={{ height: '40px' }}></img></span><span style={{ fontSize: '35px' }}>MOTION SLAYER</span></NavLink>
                         <ul id="nav-mobile" className="left hide-on-med-and-down">
+                            <li>
+                                <NavLink to="/AboutUs" style={{ color: 'black' }}>About</NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/Leaderboard" style={{ color: 'black' }}>Leaderboard</NavLink>
+                            </li>
+                        </ul>
+                        <ul id="nav-mobile" className="right hide-on-med-and-down">
                             {
                                 (token !== '') ? null : (
                                     <>
@@ -23,14 +31,6 @@ class Navbar extends Component {
                                     </>
                                 )
                             }
-                            <li>
-                                <NavLink to="/AboutUs" style={{ color: 'black' }}>About</NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="/Leaderboard" style={{ color: 'black' }}>Leaderboard</NavLink>
-                            </li>
-                        </ul>
-                        <ul id="nav-mobile" className="right hide-on-med-and-down">
                             {
                                 (token !== '') && (
                                     <li>

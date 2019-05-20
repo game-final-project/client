@@ -185,12 +185,12 @@ class Game extends Component {
                         <a style={{ marginLeft: '5px' }} id="tutor_button" href="_blank" data-target="howToPlayModal" className="modal-trigger waves-effect black btn">HOW TO PLAY</a>
                     </div>
                     <div className="col">
-                        <h6>Direction: <span style={{ color: 'gold' }}>{direction}</span></h6>
-                        <h6>Accuracy: <span style={{ color: 'gold' }}>{accuracy}</span></h6>
+                        <h4>Direction: <span style={{ color: 'gold' }}>{direction}</span></h4>
+                        <h4>Accuracy: <span style={{ color: 'gold' }}>{Number(accuracy).toFixed(2)}</span></h4>
                         {/* AUDIO TESTING */}
-                        <h6>Prediction: <span style={{ color: 'gold' }}>{(prediction === 'UP') ? (JSON.stringify(true)) : (JSON.stringify(false))}</span></h6>
+                        <h4>Prediction: <span style={{ color: 'gold' }}>{(prediction === 'UP') ? (JSON.stringify(true)) : (JSON.stringify(false))}</span></h4>
                         {/* AUDIO TESTING */}
-                        <video autoPlay playsInline muted id="webcam" width="200" height="200"></video>
+                        <video autoPlay playsInline muted id="webcam" width="237" height="200"></video>
                         <br />
                         <a href="_blank" onClick={(event) => event.preventDefault()} id="class-a" className="waves-effect waves-teal btn">UP</a>
                         {
