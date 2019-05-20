@@ -281,15 +281,15 @@ export default function sketch(p) {
         this.x -= 5
       }
       //Testing with mouse movement
-      this.x = p.mouseX
+      // this.x = p.mouseX
     }
   }
 
   // Testing with mouse pressed
-  p.mousePressed = () => {
-  bullets.push(new Bullet(hero.x, hero.y - 20))
+  // p.mousePressed = () => {
+  // bullets.push(new Bullet(hero.x, hero.y - 20))
   // bombsShow.pop()
-  }
+  // }
 
   const hero = new Hero(width / 2, heigth - 110)
 
