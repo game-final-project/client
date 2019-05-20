@@ -12,7 +12,8 @@ import bombImage from '../images/bomb.png'
 //sound
 import laser1Sound from '../sounds/laser1.wav'
 import stab1Sound from '../sounds/stab1.wav'
-import bossSound from '../sounds/arggh1.wav'
+import bossSound from '../sounds/boss2.wav'
+import bossCome from '../sounds/bossCome.wav'
 import healthSound1 from '../sounds/health1.wav'
 import explodeBomb from '../sounds/explode1.mp3'
 import timeBomb from '../sounds/timebomb.mp3'
@@ -48,16 +49,17 @@ export default function sketch(p) {
     monsters.push(new Monster(p.random(10, width - 10)))
     let interval = setInterval(() => {
       time++
-      if (time % 10 === 0) {
+      if (time % 7 === 0) {
         let totalEnemy = time / 10
         for (let i = 0; i <= totalEnemy; i++) {
           monsters.push(new Monster(p.random(10, width - 10)))
         }
       }
-      if (time % 15 === 0) {
+      if (time % 13 === 0) {
         monsters.push(new Monster2(p.random(10, width - 10)))
       }
       if (time % 20 === 0) {
+        p.sound8.play()
         bosses.push(new Boss(p.random(10, width - 10)))
       }
       if (time % 60 === 0) {
@@ -299,6 +301,7 @@ export default function sketch(p) {
     p.sound5 = new Audio(healthSound1)
     p.sound6 = new Audio (explodeBomb)
     p.sound7 = new Audio (timeBomb)
+    p.sound8 = new Audio (bossCome)
 
     //image
     p.image1 = p.loadImage(monster1)
