@@ -139,7 +139,10 @@ class Game extends Component {
             this.setState({
                 prediction: scores[0].word.toUpperCase()
             })
-        }, { probabilityThreshold: 0.99 });
+        }, {
+                invokeCallbackOnNoiseAndUnknown: true,
+                probabilityThreshold: 0.99
+            });
     }
     // AUDIO TESTING
 
@@ -197,9 +200,9 @@ class Game extends Component {
                         <h4>Direction: <span style={{ color: 'gold' }}>{direction}</span></h4>
                         <h4>Accuracy: <span style={{ color: 'gold' }}>{Number(accuracy).toFixed(2)}</span></h4>
                         {/* AUDIO TESTING */}
-                        <h4>Prediction: <span style={{ color: 'gold' }}>{(prediction === 'UP') ? (JSON.stringify(true)) : (JSON.stringify(false))}</span></h4>
+                        <h4>Bomb Command: <span style={{ color: 'gold' }}>{(prediction === 'UP') ? (JSON.stringify(true)) : (JSON.stringify(false))}</span></h4>
                         {/* AUDIO TESTING */}
-                        <div style={{width: "237px", height: '200px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                        <div style={{ width: "237px", height: '200px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                             {
                                 (this.state.webcamLoading) && (
                                     <img width="137" height="100" src={Loading} alt="loading" />
