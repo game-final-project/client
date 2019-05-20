@@ -230,10 +230,10 @@ export default function sketch(p) {
   const dropLife = []
 
 
-  //container particles 
+  //container particles
   const particles = []
 
-  //container bombs 
+  //container bombs
   const boms = []
 
   //container show bombs
@@ -327,6 +327,7 @@ export default function sketch(p) {
     let state = false
 
     p.myCustomRedrawAccordingToNewPropsHandler = async (newProps) => {
+      props = newProps
       try {
         if (gameOver) {
           let state = false
@@ -366,7 +367,6 @@ export default function sketch(p) {
           // audio game
           if (newProps.prediction === 'UP') {
             shoot = true
-            props = newProps
           }
         }
       } catch (error) {
@@ -559,9 +559,11 @@ export default function sketch(p) {
             score += bos.score
             bosses.splice(idx, 1)
             bosKill++
-            if (bosKill >= 1) {
+            if (bosKill >= 3) {
               bosKill = 0
               particleReady++
+              bombsShow.push(new ShowBomb((15 * bombsShow.length + 1) + 65, heigth - 28))
+              props.setParticle()
             }
           }
         }

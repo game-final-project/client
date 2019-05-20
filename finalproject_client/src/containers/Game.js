@@ -27,7 +27,8 @@ class Game extends Component {
         prediction: '',
         // AUDIO TESTING
         webcamLoading: true,
-        show: 'none'
+        show: 'none',
+        particle: 0
     }
 
     componentDidMount() {
@@ -135,9 +136,12 @@ class Game extends Component {
             scores = Array.from(scores).map((s, i) => ({ score: s, word: words[i] }));
             // Find the most probable word.
             scores.sort((s1, s2) => s2.score - s1.score);
-            this.setState({
-                prediction: scores[0].word.toUpperCase()
-            })
+            
+            if (this.state.particle > 0) {
+                this.setState({
+                    prediction: scores[0].word.toUpperCase()
+                })
+            }
         }, {
                 invokeCallbackOnNoiseAndUnknown: true,
                 probabilityThreshold: 0.99
@@ -171,7 +175,7 @@ class Game extends Component {
     }
 
     render() {
-        const { direction, ready, up, right, down, left, life, accuracy, prediction, show } = this.state
+        const { direction, ready, up, right, down, left, life, accuracy, prediction, show, particle } = this.state
         const { replace } = this.props.history
         const { users } = this.props
         return (
@@ -180,7 +184,17 @@ class Game extends Component {
                 <Tutorial />
                 <div className="row">
                     <div style={{ marginTop: '15px' }} className="col">
-                        <P5Wrapper users={users} replace={replace} life={life} direction={direction} sketch={sketch} ready={ready} prediction={prediction} resetState={() => this.setState({ prediction: 'DOWN' })} />
+                        <P5Wrapper
+                            users={users}
+                            replace={replace}
+                            life={life}
+                            direction={direction}
+                            sketch={sketch}
+                            ready={ready}
+                            prediction={prediction}
+                            resetState={() => this.setState({ prediction: 'DOWN' })}
+                            setParticle={async () => await this.setState({ particle: particle + 1 })}
+                        />
                         {
                             (left && !ready) ? (
                                 <a href="_blank" onClick={(event) => {
