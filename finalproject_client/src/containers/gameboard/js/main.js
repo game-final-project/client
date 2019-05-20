@@ -37,6 +37,7 @@ export default function sketch(p) {
   let score = 0
   const baseUrl = 'http://35.247.190.168'
   let bosKill = 0
+  // let particleReady = 0
   let particleReady = 0
 
   // variable for shoot game
@@ -323,8 +324,6 @@ export default function sketch(p) {
         if (gameOver) {
           let state = false
           let myScore = localStorage.getItem('score')
-          console.log(myScore)
-          console.log(score)
           if (score > myScore && !state) {
             state = true
             let data = await axios({
@@ -349,6 +348,7 @@ export default function sketch(p) {
           }, 3000);
         }
         if (newProps.ready) {
+          particleReady = newProps.particleReady
           if (newProps.direction) {
             direction = newProps.direction
           }
@@ -484,7 +484,7 @@ export default function sketch(p) {
         p.sound1.play()
       }
       if (shoot === true && !gameOver && particleReady >= 1) {
-        particleReady--
+        props.particleReadyMin()
         boms.push(new Bomb(hero.x + 24, hero.y))
         bombsShow.pop()
         p.sound1.play()
@@ -545,7 +545,7 @@ export default function sketch(p) {
             bosKill++
             if(bosKill >= 3) {
               bosKill = 0
-              particleReady++
+              props.particleReadyPlus()
             }
           }
         }

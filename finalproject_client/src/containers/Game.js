@@ -23,8 +23,9 @@ class Game extends Component {
         life: 3,
         // AUDIO TESTING
         recognizer: speechCommands.create('BROWSER_FFT', 'directional4w'),
-        prediction: ''
+        prediction: '',
         // AUDIO TESTING
+        particleReady: 0
     }
 
     componentDidMount() {
@@ -121,18 +122,21 @@ class Game extends Component {
 
     // AUDIO TESTING
     predictWord = () => {
-        const { recognizer } = this.state
+        const { recognizer, particleReady } = this.state
         // Array of words that the recognizer is trained to recognize.
         const words = recognizer.wordLabels();
         recognizer.listen(({ scores }) => {
+            console.log('masukkkkkkkkkkkkkkkkkkkkkkk')
             // Turn scores into a list of (score,word) pairs.
             scores = Array.from(scores).map((s, i) => ({ score: s, word: words[i] }));
             // Find the most probable word.
             scores.sort((s1, s2) => s2.score - s1.score);
             console.log(scores[0].word.toUpperCase(), '=== PREDICTION')
-            this.setState({
-                prediction: scores[0].word.toUpperCase()
-            })
+            if(particleReady > 0) {
+                this.setState({
+                    prediction: scores[0].word.toUpperCase()
+                })
+            }
         }, { probabilityThreshold: 0.99 });
     }
     // AUDIO TESTING
@@ -160,7 +164,7 @@ class Game extends Component {
     }
 
     render() {
-        const { direction, ready, up, right, down, left, life, accuracy, prediction } = this.state
+        const { direction, ready, up, right, down, left, life, accuracy, prediction, particleReady } = this.state
         const { replace } = this.props.history
         const { users } = this.props
         return (
@@ -169,7 +173,7 @@ class Game extends Component {
                 <Tutorial />
                 <div className="row">
                     <div style={{ marginTop: '15px' }} className="col">
-                        <P5Wrapper users={users} replace={replace} life={life} direction={direction} sketch={sketch} ready={ready} prediction={prediction} resetState={() => this.setState({ prediction: 'DOWN' })} />
+                        <P5Wrapper users={users} replace={replace} life={life} direction={direction} sketch={sketch} ready={ready} particleReady={particleReady} prediction={prediction} resetState={() => this.setState({ prediction: 'DOWN' })} particleReadyMin={() => this.setState({ particleReady: particleReady - 1 })} particleReadyPlus={() => this.setState({ particleReady: particleReady + 1 })} />
                         {
                             (left && !ready) ? (
                                 <a href="_blank" onClick={(event) => {
