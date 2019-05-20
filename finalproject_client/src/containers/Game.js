@@ -204,7 +204,7 @@ class Game extends Component {
                         <h4>Direction: <span style={{ color: 'gold' }}>{direction}</span></h4>
                         <h4>Accuracy: <span style={{ color: 'gold' }}>{Number(accuracy).toFixed(2)}</span></h4>
                         {/* AUDIO TESTING */}
-                        <h4>Bomb Command: <span style={{ color: 'gold' }}>{(prediction === 'UP') ? (JSON.stringify(true)) : (JSON.stringify(false))}</span></h4>
+                        <h4>Bomb: <span style={{ color: 'gold' }}>{(prediction === 'UP') ? (JSON.stringify(true)) : (JSON.stringify(false))}</span></h4>
                         {/* AUDIO TESTING */}
                         <div style={{ width: "237px", height: '200px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                             {
