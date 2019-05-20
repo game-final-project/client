@@ -288,7 +288,7 @@ export default function sketch(p) {
     // bombsShow.pop()
   // }
 
-  const hero = new Hero(width / 2, heigth - 60)
+  const hero = new Hero(width / 2, heigth - 110)
 
   p.preload = () => {
     //sounds
@@ -393,7 +393,7 @@ export default function sketch(p) {
     p.textFont('Bangers')
     p.textSize(16)
     p.fill(0)
-    p.text('Monsters : ' + monsters.length, 20, 60)
+    p.text('Monsters : ' + monsters.length, 20, heigth - 30)
 
     p.textFont(32)
     p.text(time, width / 2, 30)
@@ -404,7 +404,7 @@ export default function sketch(p) {
 
     p.textSize(32)
     p.fill(0)
-    p.text( particleReady === 0 ? ('BOMB : 0') : ('BOMB : ') , 20, 90);
+    p.text( particleReady === 0 ? ('BOMB : 0') : ('BOMB : ') , 20, heigth - 10);
     
     bombsShow.forEach( bomb => {
       bomb.display()
@@ -447,6 +447,10 @@ export default function sketch(p) {
         p.sound5.play()
       }
 
+      if(life.y >= heigth) {
+        dropLife.splice(lifeIdx,1)
+      }
+
       lifeEl.update()
       lifeEl.display()
     })
@@ -473,14 +477,21 @@ export default function sketch(p) {
           p.sound6.play()
         }
       })
+
+      if(bomb.y <= 0) {
+        boms.splice(bomIdx, 1)
+      }
+
       bomb.update()
       bomb.display()
     })
 
     let range = new Date()
     let n = range.getMilliseconds()
-    if (n % 2 === 0) {
+    let goShoot = true
+    if (n % 2 === 0 && goShoot) {
       if (direction === 'UP' && !gameOver && swordTime === 0) {
+        goShoot = false
         bullets.push(new Bullet(hero.x + 24, hero.y))
         p.sound1.play()
       }
@@ -518,20 +529,21 @@ export default function sketch(p) {
         let distWithHero = p.dist(monster.x + 24, monster.y, hero.x, hero.y) 
         if( distWithHero <= 24) {
           life--
-
         }
 
       })
-      monster.update()
-      monster.display()
-      if (monster.y >= heigth - 20) {
+
+      if (monster.y >= heigth - 110) {
         monsters.splice(idxMonster, 1)
         life--
       }
+
+      monster.update()
+      monster.display()
     })
 
     bosses.forEach((bos, idx) => {
-      if (bos.y >= heigth - 20) {
+      if (bos.y >= heigth - 110) {
         bosses.splice(idx, 1)
         life--
       }
