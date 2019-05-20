@@ -24,8 +24,8 @@ import axios from 'axios'
 
 
 export default function sketch(p) {
-  const width = window.screen.width / 2
-  const heigth = 400
+  const width = 940
+  const heigth = 650
   let direction = ''
   let life = 3
   let swordTime = 0

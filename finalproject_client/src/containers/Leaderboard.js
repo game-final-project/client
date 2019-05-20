@@ -6,6 +6,7 @@ import Register from '../components/Register'
 import Login from '../components/Login'
 import M from 'materialize-css'
 import { relative } from 'path';
+import Background from '../assets/leaderboardBG.gif'
 
 class Leaderboard extends Component {
   componentDidMount() {
@@ -42,7 +43,7 @@ class Leaderboard extends Component {
     return (
       <>
         <div>
-          <img src="http://stormandsky.com/gif/16.gif" alt="background" width="100%" style={{ position: relative }} />
+          <img src={Background} alt="background" width="100%" style={{ position: relative }} />
         </div>
         <Register {...this.props} />
         <Login {...this.props} />
