@@ -658,7 +658,6 @@ export default function sketch(p) {
 
       bosses.forEach((bosMon, bosIdx) => {
         let pboss = p.dist(bosMon.x+ 48 , bosMon.y, supermn.x + 250, supermn.y+ 75 ) 
-        console.log(pboss)
         if( pboss < 80) {
           bosses.splice(bosIdx, 1) 
           score += bosses.score
