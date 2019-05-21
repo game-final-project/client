@@ -46,12 +46,10 @@ export default function sketch(p) {
   let bosKill = 0
   let bombReady = 0
   let supermanSpawn = Math.floor(p.random(30, 60))
-  console.log(supermanSpawn)
 
   // variable for shoot game
   let shoot = false
   let props = {}
-
   // game time
   let timer = function () {
     monsters.push(new Monster(p.random(10, width - 10)))
@@ -84,7 +82,7 @@ export default function sketch(p) {
       }
 
       if(time === supermanSpawn) {
-        supermanShow.push(new SupermanMove(10, height / 3))
+        supermanShow.push(new SupermanMove(-250, height / 3))
       }
 
       if (gameOver) {
@@ -179,7 +177,6 @@ export default function sketch(p) {
 
     
     update() {
-      console.log(this.randomSpeed)
       this.y += 0.1 + this.randomSpeed
     }
   }
@@ -599,7 +596,7 @@ export default function sketch(p) {
     bosses.forEach((bos, idx) => {
       if (bos.y >= height - 110) {
         bosses.splice(idx, 1)
-        life--
+        life -= 2
       }
       bullets.forEach((bull, jdx) => {
         let d = p.dist(bos.x + 48, bos.y, bull.x, bull.y)
@@ -655,6 +652,24 @@ export default function sketch(p) {
         if( distMons < 50 ) {
           monsters.splice(monInd, 1)
           score += mons.score
+        }
+      })
+
+
+      bosses.forEach((bosMon, bosIdx) => {
+        let pboss = p.dist(bosMon.x+ 48 , bosMon.y, supermn.x + 250, supermn.y+ 75 ) 
+        console.log(pboss)
+        if( pboss < 80) {
+          bosses.splice(bosIdx, 1) 
+          score += bosses.score
+          bosKill++
+
+          if (bosKill >= 3) {
+            bosKill = 0
+            bombReady++
+            bombsShow.push(new ShowBomb((15 * bombsShow.length + 1) + 65, height - 28))
+            props.setParticle()
+          }
         }
       })
 
