@@ -306,15 +306,15 @@ export default function sketch(p) {
         this.x -= 5
       }
       //Testing with mouse movement
-      this.x = p.mouseX
+      // this.x = p.mouseX
     }
   }
 
   // Testing with mouse pressed
-  p.mousePressed = () => {
-  bullets.push(new Bullet(hero.x, hero.y - 20))
-  // bombsShow.pop()
-  }
+  // p.mousePressed = () => {
+  // bullets.push(new Bullet(hero.x, hero.y - 20))
+  // // bombsShow.pop()
+  // }
 
   // container for lifes
   const totalLife = []
