@@ -29,11 +29,8 @@ class Game extends Component {
         webcamLoading: true,
         show: 'none',
         particle: 0,
-<<<<<<< HEAD
-        soundBackground: new Audio (backsound1)
-=======
+        soundBackground: new Audio (backsound1),
         isDispose: false
->>>>>>> 0677776268d1fb5ffa29063d4f1bcbde2180103a
     }
 
     componentDidMount() {

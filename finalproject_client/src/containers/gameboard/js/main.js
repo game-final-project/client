@@ -121,15 +121,15 @@ export default function sketch(p) {
 
     update(dirX, dirY) {
       if (dirX === 'plus') {
-        this.x += 5
+        this.x += 10
       } else if (dirX === 'minus') {
-        this.x += -5
+        this.x += -10
       }
 
       if (dirY === 'plus') {
-        this.y += 5
+        this.y += 10
       } else if (dirY === 'minus') {
-        this.y += -5
+        this.y += -10
       }
     }
   }
@@ -410,18 +410,22 @@ export default function sketch(p) {
       p.background(p.bg3)
     }
 
+    p.stroke(255)
     p.textFont('Bangers')
     p.textSize(16)
     p.fill(0)
     p.text('Monsters : ' + monsters.length, 20, height - 30)
 
+    p.stroke(255)
     p.textFont(32)
     p.text(time, width / 2, 30)
 
+    p.stroke(255)
     p.textSize(32);
     p.fill(0);
     p.text('score : ' + score, width - 50 - (score.toString().length * 10), 30);
 
+    p.stroke(255)
     p.textSize(32)
     p.fill(0)
     p.text(bombReady === 0 ? ('BOMB : 0') : ('BOMB : '), 20, height - 10);
@@ -464,7 +468,7 @@ export default function sketch(p) {
       part.update(randomDirection(), randomDirection())
       part.lifeTime()
       part.display()
-      if (part.time >= 25) {
+      if (part.time >= 50) {
         particles.splice(idx, 1)
       }
     })
@@ -554,8 +558,8 @@ export default function sketch(p) {
       })
 
       if (monster.y >= height - 110) {
-        monsters.splice(idxMonster, 1)
-        life--
+        // monsters.splice(idxMonster, 1)
+        // life--
       }
 
       monster.update()
