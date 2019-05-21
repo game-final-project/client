@@ -10,6 +10,7 @@ import sword1 from '../images/sword.png'
 import heart1 from '../images/heart2.png'
 import monsterBoss1 from '../images/mon1.gif'
 import bombImage from '../images/bomb.png'
+import superman1 from '../images/superman1.png'
 
 //sound
 import laser1Sound from '../sounds/laser1.wav'
@@ -19,6 +20,7 @@ import bossCome from '../sounds/bossCome.wav'
 import healthSound1 from '../sounds/health1.wav'
 import explodeBomb from '../sounds/explode1.mp3'
 import timeBomb from '../sounds/timebomb.mp3'
+
 
 //backsound
 import backgroundSound from '../sounds/backsound1.mp3'
@@ -43,6 +45,8 @@ export default function sketch(p) {
   const baseUrl = 'http://35.247.190.168'
   let bosKill = 0
   let bombReady = 0
+  let supermanSpawn = Math.floor(p.random(30, 60))
+  console.log(supermanSpawn)
 
   // variable for shoot game
   let shoot = false
@@ -61,12 +65,12 @@ export default function sketch(p) {
         }
       }
 
-      // wave normal
-      if (time % 30 === 0) {
-        for (let i = 0; i < 5; i++) {
-          monsters.push(new Monster(p.random(10, width - 10)))
-        }
-      }
+      // // wave normal
+      // if (time % 30 === 0) {
+      //   for (let i = 0; i < 5; i++) {
+      //     monsters.push(new Monster(p.random(10, width - 10)))
+      //   }
+      // }
 
       if (time % 13 === 0) {
         monsters.push(new Monster2(p.random(10, width - 10)))
@@ -77,6 +81,10 @@ export default function sketch(p) {
       }
       if (time % 60 === 0) {
         dropLife.push(new LifeDrop(p.random(10, width - 10)))
+      }
+
+      if(time === supermanSpawn) {
+        supermanShow.push(new SupermanMove(40, height / 3))
       }
 
       if (gameOver) {
@@ -99,6 +107,21 @@ export default function sketch(p) {
 
     update() {
       this.y += 2.2
+    }
+  }
+
+  class SupermanMove{
+    constructor(x, y) {
+      this.x = x
+      this.y = y
+    }
+
+    display() {
+      p.image(p.image9,this.x, this.y,  250, 150)
+    }
+
+    update() {
+      this.x += 2
     }
   }
 
@@ -136,19 +159,30 @@ export default function sketch(p) {
 
   //class Monster
   class Monster {
-    constructor() {
-      this.x = p.random(30, width - 30)
-      this.y = 40
+    constructor(x, y) {
+      this.x = width/ 2
+      // p.random(30, width - 30)
+      this.y = height /2 - 200
+      // 40
       this.name = 'normal'
       this.score = 100
+      this.randomSpeed = 0
+      this.randomSpeedMonster()
     }
 
     display() {
       p.image(p.image1, this.x, this.y, 48, 48)
     }
 
+
+    randomSpeedMonster() {
+      this.randomSpeed = p.random(0.1,0.6)
+    }
+
+    
     update() {
-      this.y += 0.11
+      console.log(this.randomSpeed)
+      this.y += 0.1 + this.randomSpeed
     }
   }
 
@@ -272,15 +306,15 @@ export default function sketch(p) {
         this.x -= 5
       }
       //Testing with mouse movement
-      // this.x = p.mouseX
+      this.x = p.mouseX
     }
   }
 
   // Testing with mouse pressed
-  // p.mousePressed = () => {
-  // bullets.push(new Bullet(hero.x, hero.y - 20))
+  p.mousePressed = () => {
+  bullets.push(new Bullet(hero.x, hero.y - 20))
   // bombsShow.pop()
-  // }
+  }
 
   // container for lifes
   const totalLife = []
@@ -304,6 +338,9 @@ export default function sketch(p) {
   // spawn hero
   const hero = new Hero(width / 2, height - 110)
 
+  //spawn superman
+  const supermanShow = []
+
   p.preload = () => {
     //sounds
     p.sound1 = new Audio(laser1Sound)
@@ -324,11 +361,14 @@ export default function sketch(p) {
     p.image6 = p.loadImage(heart1)
     p.image7 = p.loadImage(monsterBoss1)
     p.image8 = p.loadImage(bombImage)
+    p.image9 = p.loadImage(superman1)
   }
 
   p.setup = () => {
     // setting canvas width and height
     p.createCanvas(width, height)
+    p.pixelDensity(3)
+
     p.bg1 = p.loadImage(background1)
     p.bg2 = p.loadImage(background2)
     p.bg3 = p.loadImage(background3)
@@ -399,7 +439,6 @@ export default function sketch(p) {
     return direction[randomNumber(0, direction.length)]
   }
 
-
   p.draw = () => {
     // background Image
     if(time < 30) {
@@ -452,7 +491,6 @@ export default function sketch(p) {
     bombsShow.forEach(bomb => {
       bomb.display()
     })
-
 
     //start here
     particles.forEach((part, idx) => {
@@ -549,17 +587,11 @@ export default function sketch(p) {
           bullets.splice(idxBull, 1)
         }
 
-        let distWithHero = p.dist(monster.x + 24, monster.y, hero.x, hero.y)
-        if (distWithHero <= 16) {
-          monsters.splice(idxMonster,1)
-          life--
-        }
-
       })
 
       if (monster.y >= height - 110) {
-        // monsters.splice(idxMonster, 1)
-        // life--
+        monsters.splice(idxMonster, 1)
+        life--
       }
 
       monster.update()
@@ -604,7 +636,38 @@ export default function sketch(p) {
       bullet.display()
     })
 
+    supermanShow.forEach((supermn, superIdx) => {
+      bullets.forEach((bull, bullIdx) => {
+        let d = p.dist(bull.x, bull.y, supermn.x + 50, supermn.y+ 10)
+
+        if( d < 150) {
+          supermanShow.splice(superIdx, 1)
+          bullets.splice(bullIdx, 1)
+          if((score -= 1000) < 0 ) {
+            score = 0
+          } else {
+            score -= 1000
+          }
+        }
+
+      })
+
+      monsters.forEach((mons, monInd) => {
+        let distMons = p.dist(mons.x+ 24 , mons.y, supermn.x + 250, supermn.y+ 75 ) 
+        if( distMons < 50 ) {
+          monsters.splice(monInd, 1)
+          score += mons.score
+        }
+      })
+
+      supermn.display()
+      supermn.update()
+    })
+
     hero.display()
     hero.update(direction)
+
+
+
   }
 }
