@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import 'p5/lib/addons/p5.sound'
 import * as tf from '@tensorflow/tfjs';
 import * as mobilenet from '@tensorflow-models/mobilenet';
 import * as knnClassifier from '@tensorflow-models/knn-classifier';
@@ -11,6 +10,8 @@ import Tutorial from '../components/Tutorial'
 import { connect } from 'react-redux'
 import HowToPlay from '../components/HowToPlay'
 import Loading from '../assets/loading.gif'
+import backsound1 from './gameboard/sounds/backsound1.mp3'
+
 
 class Game extends Component {
     state = {
@@ -27,7 +28,8 @@ class Game extends Component {
         // AUDIO TESTING
         webcamLoading: true,
         show: 'none',
-        particle: 0
+        particle: 0,
+        soundBackground: new Audio (backsound1)
     }
 
     componentDidMount() {
@@ -43,6 +45,14 @@ class Game extends Component {
             M.Modal.init(modal)
             this.app();
         }
+    }
+
+    playBackground() {
+        this.state.soundBackground.play()
+    }
+
+    componentWillUnmount() {
+        this.state.soundBackground.pause()
     }
 
     app = async () => {
@@ -220,6 +230,8 @@ class Game extends Component {
                                     <img width="137" height="100" src={Loading} alt="loading" />
                                 )
                             }
+
+                            { this.state.webcamLoading ? null : this.playBackground() }
                             <video style={{ display: show }} autoPlay playsInline muted id="webcam" width="237" height="200"></video>
                         </div>
                         <br />

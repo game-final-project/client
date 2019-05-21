@@ -336,9 +336,9 @@ export default function sketch(p) {
 
     p.myCustomRedrawAccordingToNewPropsHandler = async (newProps) => {
       props = newProps
-      if(!newProps.webcamLoading) {
-        p.sound3.play()
-      }
+      // if(!newProps.webcamLoading) {
+      //   p.sound3.play()
+      // }
       try {
         if (gameOver) {
           let state = false
@@ -401,8 +401,6 @@ export default function sketch(p) {
 
   p.draw = () => {
     // background Image
-
-
     if(time < 30) {
       p.background(p.bg1)
     } else if(time < 60) {
@@ -427,14 +425,14 @@ export default function sketch(p) {
     p.fill(0)
     p.text(bombReady === 0 ? ('BOMB : 0') : ('BOMB : '), 20, height - 10);
 
-    let range = new Date()
-    let n = range.getMilliseconds()
+    let n = p.millis().toFixed(0)
     let goShoot = true
     if (n % 2 === 0 && goShoot) {
       if (direction === 'UP' && !gameOver && swordTime === 0) {
         goShoot = false
         bullets.push(new Bullet(hero.x + 24, hero.y))
         p.sound1.play()
+        direction = 'DOWN'
       }
       if (shoot === true && !gameOver && bombReady >= 1) {
         bombReady--
