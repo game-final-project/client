@@ -29,7 +29,11 @@ class Game extends Component {
         webcamLoading: true,
         show: 'none',
         particle: 0,
+<<<<<<< HEAD
         soundBackground: new Audio (backsound1)
+=======
+        isDispose: false
+>>>>>>> 0677776268d1fb5ffa29063d4f1bcbde2180103a
     }
 
     componentDidMount() {
@@ -101,35 +105,40 @@ class Game extends Component {
         if (leftButton) leftButton.addEventListener('click', () => addExample(3));
 
         while (true) {
-            if (classifier.getNumClasses() > 0) {
-                // Get the activation from mobilenet from the webcam.
-                const activation = net.infer(webcamElement, 'conv_preds');
-                // Get the most likely class and confidences from the classifier module.
-                const result = await classifier.predictClass(activation);
-
-                const classes = ['UP', 'RIGHT', 'DOWN', 'LEFT'];
-                this.setState({
-                    direction: classes[result.classIndex],
-                    accuracy: result.confidences[result.classIndex]
-                }, () => {
-                    if (classes[result.classIndex] === 'UP' && result.confidences[result.classIndex] === 1) {
-                        this.setState({
-                            up: true
-                        })
-                    } else if (classes[result.classIndex] === 'RIGHT' && result.confidences[result.classIndex] === 1) {
-                        this.setState({
-                            right: true
-                        })
-                    } else if (classes[result.classIndex] === 'DOWN' && result.confidences[result.classIndex] === 1) {
-                        this.setState({
-                            down: true
-                        })
-                    } else if (classes[result.classIndex] === 'LEFT' && result.confidences[result.classIndex] === 1) {
-                        this.setState({
-                            left: true
-                        })
-                    }
-                })
+            if(this.state.isDispose) {
+                classifier.clearAllClasses()
+                classifier.dispose()
+            } else {
+                if (classifier.getNumClasses() > 0) {
+                    // Get the activation from mobilenet from the webcam.
+                    const activation = net.infer(webcamElement, 'conv_preds');
+                    // Get the most likely class and confidences from the classifier module.
+                    const result = await classifier.predictClass(activation);
+    
+                    const classes = ['UP', 'RIGHT', 'DOWN', 'LEFT'];
+                    this.setState({
+                        direction: classes[result.classIndex],
+                        accuracy: result.confidences[result.classIndex]
+                    }, () => {
+                        if (classes[result.classIndex] === 'UP' && result.confidences[result.classIndex] === 1) {
+                            this.setState({
+                                up: true
+                            })
+                        } else if (classes[result.classIndex] === 'RIGHT' && result.confidences[result.classIndex] === 1) {
+                            this.setState({
+                                right: true
+                            })
+                        } else if (classes[result.classIndex] === 'DOWN' && result.confidences[result.classIndex] === 1) {
+                            this.setState({
+                                down: true
+                            })
+                        } else if (classes[result.classIndex] === 'LEFT' && result.confidences[result.classIndex] === 1) {
+                            this.setState({
+                                left: true
+                            })
+                        }
+                    })
+                }
             }
             await tf.nextFrame();
         }
@@ -201,6 +210,7 @@ class Game extends Component {
                             sketch={sketch}
                             ready={ready}
                             prediction={prediction}
+                            disposeClass={() => this.setState({ isDispose: true })}
                             resetState={() => this.setState({ prediction: 'DOWN', particle: particle - 1 })}
                             setParticle={async () => await this.setState({ particle: particle + 1 })}
                         />

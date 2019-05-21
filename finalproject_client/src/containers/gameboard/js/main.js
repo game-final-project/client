@@ -361,6 +361,7 @@ export default function sketch(p) {
             await localStorage.setItem('score', score)
           }
           setTimeout(() => {
+            props.disposeClass()
             p.sound3.pause()
             p.sound3.currentTime = 0
             newProps.replace('/Leaderboard')
