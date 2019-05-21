@@ -84,7 +84,7 @@ export default function sketch(p) {
       }
 
       if(time === supermanSpawn) {
-        supermanShow.push(new SupermanMove(40, height / 3))
+        supermanShow.push(new SupermanMove(10, height / 3))
       }
 
       if (gameOver) {
@@ -160,10 +160,8 @@ export default function sketch(p) {
   //class Monster
   class Monster {
     constructor(x, y) {
-      this.x = width/ 2
-      // p.random(30, width - 30)
-      this.y = height /2 - 200
-      // 40
+      this.x = p.random(30, width - 30)
+      this.y = 40
       this.name = 'normal'
       this.score = 100
       this.randomSpeed = 0
