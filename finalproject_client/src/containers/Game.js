@@ -21,7 +21,6 @@ class Game extends Component {
         down: false,
         left: false,
         ready: false,
-        life: 3,
         // AUDIO TESTING
         recognizer: speechCommands.create('BROWSER_FFT', 'directional4w'),
         prediction: '',
@@ -181,7 +180,7 @@ class Game extends Component {
     }
 
     render() {
-        const { direction, ready, up, right, down, left, life, accuracy, prediction, show, particle } = this.state
+        const { direction, ready, up, right, down, left, webcamLoading, accuracy, prediction, show, particle } = this.state
         const { replace } = this.props.history
         const { users } = this.props
         return (
@@ -193,7 +192,7 @@ class Game extends Component {
                         <P5Wrapper
                             users={users}
                             replace={replace}
-                            life={life}
+                            webcamLoading={webcamLoading}
                             direction={direction}
                             sketch={sketch}
                             ready={ready}

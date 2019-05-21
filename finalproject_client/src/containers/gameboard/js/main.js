@@ -3,7 +3,9 @@ import monster1 from '../images/monster.png'
 import monster2 from '../images/mon2.png'
 import hero1 from '../images/hero.png'
 import gameOver1 from '../images/gameover1.jpg'
-import background2 from '../images/1390836051vzTCOXL.png'
+import background1 from '../images/background6.png'
+import background2 from '../images/background2.png'
+import background3 from '../images/background3.gif'
 import sword1 from '../images/sword.png'
 import heart1 from '../images/heart2.png'
 import monsterBoss1 from '../images/mon1.gif'
@@ -21,12 +23,14 @@ import timeBomb from '../sounds/timebomb.mp3'
 //backsound
 import backgroundSound from '../sounds/backsound1.mp3'
 
+
+
 import axios from 'axios'
 
 
 export default function sketch(p) {
   const width = 940
-  const heigth = 650
+  const height = 650
   let direction = ''
   let life = 3
   let swordTime = 0
@@ -38,8 +42,7 @@ export default function sketch(p) {
   let score = 0
   const baseUrl = 'http://35.247.190.168'
   let bosKill = 0
-  let totalEnemy = 1
-  let particleReady = 0
+  let bombReady = 0
 
   // variable for shoot game
   let shoot = false
@@ -50,12 +53,21 @@ export default function sketch(p) {
     monsters.push(new Monster(p.random(10, width - 10)))
     let interval = setInterval(() => {
       time++
+
+      //spawn normal monster
       if (time % 7 === 0) {
-        totalEnemy++
-        for (let i = 0; i < totalEnemy; i++) {
+        for (let i = 0; i < 2; i++) {
           monsters.push(new Monster(p.random(10, width - 10)))
         }
       }
+
+      // wave normal
+      if (time % 30 === 0) {
+        for (let i = 0; i < 5; i++) {
+          monsters.push(new Monster(p.random(10, width - 10)))
+        }
+      }
+
       if (time % 13 === 0) {
         monsters.push(new Monster2(p.random(10, width - 10)))
       }
@@ -136,7 +148,7 @@ export default function sketch(p) {
     }
 
     update() {
-      this.y += 0.09
+      this.y += 0.11
     }
   }
 
@@ -224,27 +236,6 @@ export default function sketch(p) {
     }
   }
 
-  // container for lifes
-  const totalLife = []
-
-  //container drop Life
-  const dropLife = []
-
-
-  //container particles
-  const particles = []
-
-  //container bombs
-  const boms = []
-
-  //container show bombs
-  const bombsShow = []
-
-  for (let i = 0; i < particleReady; i++) {
-    bombsShow.push(new ShowBomb((15 * i) + 65, heigth - 28))
-  }
-
-  //Sword class
   class Bullet {
     constructor(x, y) {
       this.x = x
@@ -291,7 +282,27 @@ export default function sketch(p) {
   // bombsShow.pop()
   // }
 
-  const hero = new Hero(width / 2, heigth - 110)
+  // container for lifes
+  const totalLife = []
+
+  //container drop Life
+  const dropLife = []
+
+  //container particles
+  const particles = []
+
+  //container bombs
+  const boms = []
+
+  //container show bombs
+  const bombsShow = []
+
+  for (let i = 0; i < bombReady; i++) {
+    bombsShow.push(new ShowBomb((15 * i) + 65, height - 28))
+  }
+
+  // spawn hero
+  const hero = new Hero(width / 2, height - 110)
 
   p.preload = () => {
     //sounds
@@ -316,19 +327,18 @@ export default function sketch(p) {
   }
 
   p.setup = () => {
-
-    setTimeout(() => {
-      p.sound3.play()
-    }, 2000);
-
-
     // setting canvas width and height
-    p.createCanvas(width, heigth)
-    p.bg = p.loadImage(background2)
+    p.createCanvas(width, height)
+    p.bg1 = p.loadImage(background1)
+    p.bg2 = p.loadImage(background2)
+    p.bg3 = p.loadImage(background3)
     let state = false
 
     p.myCustomRedrawAccordingToNewPropsHandler = async (newProps) => {
       props = newProps
+      if(!newProps.webcamLoading) {
+        p.sound3.play()
+      }
       try {
         if (gameOver) {
           let state = false
@@ -366,7 +376,6 @@ export default function sketch(p) {
             timer()
           }
 
-          // audio game
           if (newProps.prediction === 'UP') {
             shoot = true
           }
@@ -394,11 +403,19 @@ export default function sketch(p) {
   p.draw = () => {
     // background Image
 
-    p.background(p.bg)
+
+    if(time < 30) {
+      p.background(p.bg1)
+    } else if(time < 60) {
+      p.background(p.bg2)
+    } else {
+      p.background(p.bg3)
+    }
+
     p.textFont('Bangers')
     p.textSize(16)
     p.fill(0)
-    p.text('Monsters : ' + monsters.length, 20, heigth - 30)
+    p.text('Monsters : ' + monsters.length, 20, height - 30)
 
     p.textFont(32)
     p.text(time, width / 2, 30)
@@ -409,7 +426,26 @@ export default function sketch(p) {
 
     p.textSize(32)
     p.fill(0)
-    p.text(particleReady === 0 ? ('BOMB : 0') : ('BOMB : '), 20, heigth - 10);
+    p.text(bombReady === 0 ? ('BOMB : 0') : ('BOMB : '), 20, height - 10);
+
+    let range = new Date()
+    let n = range.getMilliseconds()
+    let goShoot = true
+    if (n % 2 === 0 && goShoot) {
+      if (direction === 'UP' && !gameOver && swordTime === 0) {
+        goShoot = false
+        bullets.push(new Bullet(hero.x + 24, hero.y))
+        p.sound1.play()
+      }
+      if (shoot === true && !gameOver && bombReady >= 1) {
+        bombReady--
+        boms.push(new Bomb(hero.x + 24, hero.y))
+        bombsShow.pop()
+        p.sound1.play()
+        shoot = false
+        props.resetState()
+      }
+    }
 
     bombsShow.forEach(bomb => {
       bomb.display()
@@ -452,7 +488,7 @@ export default function sketch(p) {
         p.sound5.play()
       }
 
-      if (life.y >= heigth) {
+      if (life.y >= height) {
         dropLife.splice(lifeIdx, 1)
       }
 
@@ -491,25 +527,6 @@ export default function sketch(p) {
       bomb.display()
     })
 
-    let range = new Date()
-    let n = range.getMilliseconds()
-    let goShoot = true
-    if (n % 2 === 0 && goShoot) {
-      if (direction === 'UP' && !gameOver && swordTime === 0) {
-        goShoot = false
-        bullets.push(new Bullet(hero.x + 24, hero.y))
-        p.sound1.play()
-      }
-      if (shoot === true && !gameOver && particleReady >= 1) {
-        particleReady--
-        boms.push(new Bomb(hero.x + 24, hero.y))
-        bombsShow.pop()
-        p.sound1.play()
-        shoot = false
-        props.resetState()
-      }
-    }
-
     if (monsters.length >= 60) {
       life = 0
       gameOver = true
@@ -531,13 +548,14 @@ export default function sketch(p) {
         }
 
         let distWithHero = p.dist(monster.x + 24, monster.y, hero.x, hero.y)
-        if (distWithHero <= 24) {
+        if (distWithHero <= 16) {
+          monsters.splice(idxMonster,1)
           life--
         }
 
       })
 
-      if (monster.y >= heigth - 110) {
+      if (monster.y >= height - 110) {
         monsters.splice(idxMonster, 1)
         life--
       }
@@ -547,7 +565,7 @@ export default function sketch(p) {
     })
 
     bosses.forEach((bos, idx) => {
-      if (bos.y >= heigth - 110) {
+      if (bos.y >= height - 110) {
         bosses.splice(idx, 1)
         life--
       }
@@ -563,8 +581,8 @@ export default function sketch(p) {
             bosKill++
             if (bosKill >= 3) {
               bosKill = 0
-              particleReady++
-              bombsShow.push(new ShowBomb((15 * bombsShow.length + 1) + 65, heigth - 28))
+              bombReady++
+              bombsShow.push(new ShowBomb((15 * bombsShow.length + 1) + 65, height - 28))
               props.setParticle()
             }
           }
