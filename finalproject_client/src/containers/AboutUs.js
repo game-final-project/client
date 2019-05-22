@@ -57,7 +57,7 @@ export default class AboutUs extends Component {
                                     <span className="card-title" style={{backgroundColor: '#B0B0B0', opacity: '0.9', height: '60px', color: 'black', borderRadius: '0 25px 0 0'}}>William Suryawan</span>
                                 </div>
                                 <div className="card-content" style={{ color: 'black', fontSize: '16px' }}>
-                                    <p>I am a very simple card. I am good at containing small bits of information.</p>
+                                    <p>Former Founder of a TOP100 Southeast Asia Startup. A serial enterpreneur and ex-management consultant with technical knowledge in programming.</p>
                                 </div>
                                 <div className="card-action">
                                     <a href="https://www.linkedin.com/in/williamsuryawan/" target="_blank" rel="noopener noreferrer" style={{ color: '#003399', fontSize: '24px' }}><span role='img' aria-label="logo"><img alt="linkedinlogo" src={require("../assets/linkedinlogo.png")} style={{ height: '30px' }}></img></span> LinkedIn</a>
@@ -82,9 +82,24 @@ export default class AboutUs extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="col s12 m12" >
+                <div className="row" style={{ marginTop: '20px' }}>
+                    <div className="col s12 m12" > 
                         <h2 className="header" style={{ justifyContent: 'left' }}>Technology Behind Motion Slayer</h2>
+                        <h4 className="header" style={{ justifyContent: 'left' }}> Machine Learning </h4>
+                        <img alt='techlogo' src={require("../assets/logo/tensorflow-logo.png")} style={{ height: '50px' }} />
+                    </div>
+                    <div className="col s4 m4" style={{color: 'orange'}}>
+                        <h4 className="header" style={{ justifyContent: 'left' }}> MobileNet</h4>
+                    </div>
+                    <div className="col s4 m4" style={{color: 'orange'}}>
+                        <h4 className="header" style={{ justifyContent: 'left' }}> K-Nearest Neighbors</h4>
+                    </div>
+                    <div className="col s4 m4" style={{color: 'orange'}}>
+                        <h4 className="header" style={{ justifyContent: 'left' }}> Speech Command</h4>
+                    </div>
+                </div>
+                <div className="row" style={{ marginTop: '20px' }}>
+                    <div className="col s12 m12" >
                         <h4 className="header" style={{ justifyContent: 'left' }}>Back End </h4>
                         <div className="col s3 m3" >
                             <img alt='techlogo' src={require("../assets/logo/mongoose-logo.png")} style={{ height: '90px' }} />
@@ -106,16 +121,13 @@ export default class AboutUs extends Component {
                 <div className="row" style={{ marginTop: '20px' }}>
                     <div className="col s12 m12" >
                         <h4 className="header" style={{ justifyContent: 'left', marginTop: '20px' }}>Front End </h4>
-                        <div className="col s3 m3" >
+                        <div className="col s4 m4" >
                             <img alt='techlogo' src={require("../assets/logo/React-logo.png")} style={{ height: '90px' }} />
                         </div>
-                        <div className="col s2 m2" >
+                        <div className="col s4 m4" >
                             <img alt='techlogo' src={require("../assets/logo/redux-logo.png")} style={{ height: '90px' }} />
                         </div>
-                        <div className="col s4 m4" >
-                            <img alt='techlogo' src={require("../assets/logo/tensorflow-logo.png")} style={{ height: '50px' }} />
-                        </div>
-                        <div className="col s2 m2" >
+                        <div className="col s3 m3" >
                             <img alt='techlogo' src={require("../assets/logo/p5js-logo.svg")} style={{ height: '60px' }} />
                         </div>
                         <div className="col s1 m1" >
