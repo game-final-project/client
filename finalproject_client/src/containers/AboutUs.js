@@ -16,15 +16,15 @@ export default class AboutUs extends Component {
                 <Login {...this.props} />
                 <div className="row" >
                     <div className="col s12 m12">
-                        <img src={require("../assets/togetherphoto.jpeg")} alt="teamphoto" style={{ height: '300px' }} />
+                        <img src={require("../assets/teamphoto.png")} alt="teamphoto" style={{ height: '300px' }} />
                     </div>
                     <h2 className="header" style={{ justifyContent: 'left' }}>Team behind Motion Slayer</h2>
                     <div >
                         <div className="col s3 m3" style={{ fontFamily: 'Arial' }}>
                             <div className="card yellow darken-1">
                                 <div className="card-image">
-                                    <img alt='memberphoto' src={require("../assets/tutorial/up.png")} />
-                                    <span className="card-title">Azhar Nazli</span>
+                                    <img alt='memberphoto' src={require("../assets/team/azhar.png")} style={{height:'300px'}}/>
+                                    <span className="card-title" style={{backgroundColor: '#B0B0B0', opacity: '0.9', height: '60px', color: 'black', borderRadius: '0 25px 0 0'}}>Azhar Nazli</span>
                                 </div>
                                 <div className="card-content" style={{ color: 'black', fontSize: '16px' }}>
                                     <p>I am a very simple card. I am good at containing small bits of information.</p>
@@ -38,8 +38,8 @@ export default class AboutUs extends Component {
                         <div className="col s3 m3" style={{ fontFamily: 'Arial' }}>
                             <div className="card yellow darken-1">
                                 <div className="card-image">
-                                    <img alt='memberphoto' src={require("../assets/tutorial/up.png")} />
-                                    <span className="card-title">Reyhan Huditama</span>
+                                    <img alt='memberphoto' src={require("../assets/team/reyhan.png")} style={{height:'300px'}} />
+                                    <span className="card-title" style={{backgroundColor: '#B0B0B0', opacity: '0.9', height: '60px', color: 'black', borderRadius: '0 25px 0 0'}}>Reyhan Huditama</span>
                                 </div>
                                 <div className="card-content" style={{ color: 'black', fontSize: '16px' }}>
                                     <p>I am a very simple card. I am good at containing small bits of information.</p>
@@ -53,8 +53,8 @@ export default class AboutUs extends Component {
                         <div className="col s3 m3" style={{ fontFamily: 'Arial' }}>
                             <div className="card yellow darken-1">
                                 <div className="card-image">
-                                    <img alt='memberphoto' src={require("../assets/tutorial/up.png")} />
-                                    <span className="card-title">William Suryawan</span>
+                                    <img alt='memberphoto' src={require("../assets/team/william.png")} style={{height:'300px'}} />
+                                    <span className="card-title" style={{backgroundColor: '#B0B0B0', opacity: '0.9', height: '60px', color: 'black', borderRadius: '0 25px 0 0'}}>William Suryawan</span>
                                 </div>
                                 <div className="card-content" style={{ color: 'black', fontSize: '16px' }}>
                                     <p>I am a very simple card. I am good at containing small bits of information.</p>
@@ -68,8 +68,8 @@ export default class AboutUs extends Component {
                         <div className="col s3 m3" style={{ fontFamily: 'Arial' }}>
                             <div className="card yellow darken-1">
                                 <div className="card-image">
-                                    <img alt='memberphoto' src={require("../assets/tutorial/up.png")} />
-                                    <span className="card-title">Willy Prayogo</span>
+                                    <img alt='memberphoto' src={require("../assets/team/willy.png")}  style={{height:'300px'}}/>
+                                    <span className="card-title" style={{backgroundColor: '#B0B0B0', opacity: '0.9', height: '60px', color: 'black', borderRadius: '0 25px 0 0'}}>Willy Prayogo</span>
                                 </div>
                                 <div className="card-content" style={{ color: 'black', fontSize: '16px' }}>
                                     <p>I am a very simple card. I am good at containing small bits of information.</p>
