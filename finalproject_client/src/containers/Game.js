@@ -9,6 +9,7 @@ import M from 'materialize-css'
 import Tutorial from '../components/Tutorial'
 import { connect } from 'react-redux'
 import HowToPlay from '../components/HowToPlay'
+import MonsterGuide from '../components/MonsterGuide'
 import Loading from '../assets/loading.gif'
 import backsound1 from './gameboard/sounds/backsound1.mp3'
 
@@ -196,6 +197,7 @@ class Game extends Component {
         return (
             <>
                 <HowToPlay />
+                <MonsterGuide />
                 <Tutorial />
                 <div className="row">
                     <div style={{ marginTop: '15px' }} className="col">
@@ -224,6 +226,7 @@ class Game extends Component {
                                 )
                         }
                         <a style={{ marginLeft: '5px' }} id="tutor_button" href="_blank" data-target="howToPlayModal" className="modal-trigger waves-effect black btn">HOW TO PLAY</a>
+                        <a style={{ marginLeft: '5px' }} id="tutor_button" href="_blank" data-target="monsterGuideModal" className="modal-trigger waves-effect black btn">MONSTER GUIDE</a>
                     </div>
                     <div className="col">
                         <h4>Direction: <span style={{ color: 'gold' }}>{direction}</span></h4>
