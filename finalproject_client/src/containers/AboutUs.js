@@ -23,60 +23,60 @@ export default class AboutUs extends Component {
                         <div className="col s3 m3" style={{ fontFamily: 'Arial' }}>
                             <div className="card yellow darken-1">
                                 <div className="card-image">
-                                    <img alt='memberphoto' src={require("../assets/team/azhar.png")} style={{ height: '300px' }} />
+                                    <img alt='memberphoto' src={require("../assets/team/azhar.png")} style={{ height: '260px' }} />
                                     <span className="card-title" style={{ backgroundColor: '#B0B0B0', opacity: '0.9', height: '60px', color: 'black', borderRadius: '0 25px 0 0' }}>Azhar Nazli</span>
                                 </div>
                                 <div className="card-content" style={{ color: 'black', fontSize: '16px' }}>
                                     <p>Industrial Engineering graduate with high interest in modern technology and programming.</p>
                                 </div>
                                 <div className="card-action">
-                                    <a href="https://www.linkedin.com/in/azhar-nazli-667aab15b/" target="_blank" rel="noopener noreferrer" style={{ color: '#003399', fontSize: '24px' }}><span role='img' aria-label="logo"><img alt="linkedinlogo" src={require("../assets/linkedinlogo.png")} style={{ height: '30px' }}></img></span> LinkedIn</a>
-                                    <a href="https://github.com/azharnazli" target="_blank" rel="noopener noreferrer" style={{ color: 'black', fontSize: '24px' }}><span role='img' aria-label="logo"><img alt="githublogo" src={require("../assets/githublogo.png")} style={{ height: '30px' }}></img></span> Github</a>
+                                    <a href="https://www.linkedin.com/in/azhar-nazli-667aab15b/" target="_blank" rel="noopener noreferrer" style={{ color: '#003399', fontSize: '24px' }}><span role='img' aria-label="logo"><img alt="linkedinlogo" src={require("../assets/linkedinlogo.png")} style={{ height: '30px' }}></img></span></a>
+                                    <a href="https://github.com/azharnazli" target="_blank" rel="noopener noreferrer" style={{ color: 'black', fontSize: '24px' }}><span role='img' aria-label="logo"><img alt="githublogo" src={require("../assets/githublogo.png")} style={{ height: '30px' }}></img></span></a>
                                 </div>
                             </div>
                         </div>
                         <div className="col s3 m3" style={{ fontFamily: 'Arial' }}>
                             <div className="card yellow darken-1">
                                 <div className="card-image">
-                                    <img alt='memberphoto' src={require("../assets/team/reyhan.png")} style={{ height: '300px' }} />
+                                    <img alt='memberphoto' src={require("../assets/team/reyhan.png")} style={{ height: '260px' }} />
                                     <span className="card-title" style={{ backgroundColor: '#B0B0B0', opacity: '0.9', height: '60px', color: 'black', borderRadius: '0 25px 0 0' }}>Reyhan Huditama</span>
                                 </div>
                                 <div className="card-content" style={{ color: 'black', fontSize: '16px' }}>
-                                    <p style={{ textAlign: 'justify' }}>Food Science & Technology graduate with high interest in modern technology and programming.</p>
+                                    <p>Food Science & Technology graduate with high interest in modern technology and programming.</p>
                                 </div>
                                 <div className="card-action">
-                                    <a href="https://www.linkedin.com/in/reyhan-huditama/" target="_blank" rel="noopener noreferrer" style={{ color: '#003399', fontSize: '24px' }}><span role='img' aria-label="logo"><img alt="linkedinlogo" src={require("../assets/linkedinlogo.png")} style={{ height: '30px' }}></img></span> LinkedIn</a>
-                                    <a href="https://github.com/huditama" target="_blank" rel="noopener noreferrer" style={{ color: 'black', fontSize: '24px' }}><span role='img' aria-label="logo"><img alt="githublogo" src={require("../assets/githublogo.png")} style={{ height: '30px' }}></img></span> Github</a>
+                                    <a href="https://www.linkedin.com/in/reyhan-huditama/" target="_blank" rel="noopener noreferrer" style={{ color: '#003399', fontSize: '24px' }}><span role='img' aria-label="logo"><img alt="linkedinlogo" src={require("../assets/linkedinlogo.png")} style={{ height: '30px' }}></img></span> </a>
+                                    <a href="https://github.com/huditama" target="_blank" rel="noopener noreferrer" style={{ color: 'black', fontSize: '24px' }}><span role='img' aria-label="logo"><img alt="githublogo" src={require("../assets/githublogo.png")} style={{ height: '30px' }}></img></span> </a>
                                 </div>
                             </div>
                         </div>
                         <div className="col s3 m3" style={{ fontFamily: 'Arial' }}>
                             <div className="card yellow darken-1">
                                 <div className="card-image">
-                                    <img alt='memberphoto' src={require("../assets/team/william.png")} style={{ height: '300px' }} />
+                                    <img alt='memberphoto' src={require("../assets/team/william.png")} style={{ height: '260px' }} />
                                     <span className="card-title" style={{ backgroundColor: '#B0B0B0', opacity: '0.9', height: '60px', color: 'black', borderRadius: '0 25px 0 0' }}>William Suryawan</span>
                                 </div>
                                 <div className="card-content" style={{ color: 'black', fontSize: '16px' }}>
-                                    <p style={{ textAlign: 'justify' }} >Former Founder of a TOP100 Southeast Asia Startup. A serial enterpreneur and ex-management consultant with technical knowledge in programming.</p>
+                                    <p >Former Founder of a TOP100 Southeast Asia Startup with technical knowledge in programming.</p>
                                 </div>
                                 <div className="card-action">
-                                    <a href="https://www.linkedin.com/in/williamsuryawan/" target="_blank" rel="noopener noreferrer" style={{ color: '#003399', fontSize: '24px' }}><span role='img' aria-label="logo"><img alt="linkedinlogo" src={require("../assets/linkedinlogo.png")} style={{ height: '30px' }}></img></span> LinkedIn</a>
-                                    <a href="https://github.com/williamsuryawan" target="_blank" rel="noopener noreferrer" style={{ color: 'black', fontSize: '24px' }}><span role='img' aria-label="logo"><img alt="githublogo" src={require("../assets/githublogo.png")} style={{ height: '30px' }}></img></span> Github</a>
+                                    <a href="https://www.linkedin.com/in/williamsuryawan/" target="_blank" rel="noopener noreferrer" style={{ color: '#003399', fontSize: '24px' }}><span role='img' aria-label="logo"><img alt="linkedinlogo" src={require("../assets/linkedinlogo.png")} style={{ height: '30px' }}></img></span> </a>
+                                    <a href="https://github.com/williamsuryawan" target="_blank" rel="noopener noreferrer" style={{ color: 'black', fontSize: '24px' }}><span role='img' aria-label="logo"><img alt="githublogo" src={require("../assets/githublogo.png")} style={{ height: '30px' }}></img></span> </a>
                                 </div>
                             </div>
                         </div>
                         <div className="col s3 m3" style={{ fontFamily: 'Arial' }}>
                             <div className="card yellow darken-1">
                                 <div className="card-image">
-                                    <img alt='memberphoto' src={require("../assets/team/willy.png")} style={{ height: '300px' }} />
+                                    <img alt='memberphoto' src={require("../assets/team/willy.png")} style={{ height: '260px' }} />
                                     <span className="card-title" style={{ backgroundColor: '#B0B0B0', opacity: '0.9', height: '60px', color: 'black', borderRadius: '0 25px 0 0' }}>Willy Prayogo</span>
                                 </div>
                                 <div className="card-content" style={{ color: 'black', fontSize: '16px' }}>
-                                    <p style={{ textAlign: 'justify' }}>Computer Engineering Major, specialized in Robotics and Industrial Automation graduated, with high interest in modern technology and programming.</p>
+                                    <p >Computer Engineering Major, specialized in Robotics and Industrial Automation </p>
                                 </div>
                                 <div className="card-action">
-                                    <a href="https://www.linkedin.com/in/willyprayogo26/" target="_blank" rel="noopener noreferrer" style={{ color: '#003399', fontSize: '24px' }}><span role='img' aria-label="logo"><img alt="linkedinlogo" src={require("../assets/linkedinlogo.png")} style={{ height: '30px' }}></img></span> LinkedIn</a>
-                                    <a href="https://github.com/willyprayogo26" target="_blank" rel="noopener noreferrer" style={{ color: 'black', fontSize: '24px' }}><span role='img' aria-label="logo"><img alt="githublogo" src={require("../assets/githublogo.png")} style={{ height: '30px' }}></img></span> Github</a>
+                                    <a href="https://www.linkedin.com/in/willyprayogo26/" target="_blank" rel="noopener noreferrer" style={{ color: '#003399', fontSize: '24px' }}><span role='img' aria-label="logo"><img alt="linkedinlogo" src={require("../assets/linkedinlogo.png")} style={{ height: '30px' }}></img></span> </a>
+                                    <a href="https://github.com/willyprayogo26" target="_blank" rel="noopener noreferrer" style={{ color: 'black', fontSize: '24px' }}><span role='img' aria-label="logo"><img alt="githublogo" src={require("../assets/githublogo.png")} style={{ height: '30px' }}></img></span> </a>
                                 </div>
                             </div>
                         </div>
