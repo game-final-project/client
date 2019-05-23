@@ -444,24 +444,24 @@ export default function sketch(p) {
       p.background(p.bg3)
     }
 
-    p.stroke(255)
+    p.stroke(0)
     p.textFont('Bangers')
     p.textSize(16)
-    p.fill(0)
+    p.fill(255)
     p.text('Monsters : ' + monsters.length, 20, height - 30)
 
-    p.stroke(255)
+    p.stroke(0)
     p.textFont(32)
     p.text(time, width / 2, 30)
 
-    p.stroke(255)
+    p.stroke(0)
     p.textSize(32);
-    p.fill(0);
+    p.fill(255);
     p.text('score : ' + score, width - 50 - (score.toString().length * 10), 30);
 
-    p.stroke(255)
+    p.stroke(0)
     p.textSize(32)
-    p.fill(0)
+    p.fill(255)
     p.text(bombReady === 0 ? ('BOMB : 0') : ('BOMB : '), 20, height - 10);
 
     let n = p.millis().toFixed(0)
