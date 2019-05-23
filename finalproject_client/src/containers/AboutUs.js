@@ -72,7 +72,7 @@ export default class AboutUs extends Component {
                                     <span className="card-title" style={{ backgroundColor: '#B0B0B0', opacity: '0.9', height: '60px', color: 'black', borderRadius: '0 25px 0 0' }}>Willy Prayogo</span>
                                 </div>
                                 <div className="card-content" style={{ color: 'black', fontSize: '16px' }}>
-                                    <p>I am a very simple card. I am good at containing small bits of information.</p>
+                                    <p style={{ textAlign: 'justify' }}>Computer Engineering Major, specialized in Robotics and Industrial Automation graduated, with high interest in modern technology and programming.</p>
                                 </div>
                                 <div className="card-action">
                                     <a href="https://www.linkedin.com/in/willyprayogo26/" target="_blank" rel="noopener noreferrer" style={{ color: '#003399', fontSize: '24px' }}><span role='img' aria-label="logo"><img alt="linkedinlogo" src={require("../assets/linkedinlogo.png")} style={{ height: '30px' }}></img></span> LinkedIn</a>
