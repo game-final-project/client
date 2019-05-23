@@ -23,8 +23,8 @@ export default class AboutUs extends Component {
                         <div className="col s3 m3" style={{ fontFamily: 'Arial' }}>
                             <div className="card yellow darken-1">
                                 <div className="card-image">
-                                    <img alt='memberphoto' src={require("../assets/team/azhar.png")} style={{height:'300px'}}/>
-                                    <span className="card-title" style={{backgroundColor: '#B0B0B0', opacity: '0.9', height: '60px', color: 'black', borderRadius: '0 25px 0 0'}}>Azhar Nazli</span>
+                                    <img alt='memberphoto' src={require("../assets/team/azhar.png")} style={{ height: '300px' }} />
+                                    <span className="card-title" style={{ backgroundColor: '#B0B0B0', opacity: '0.9', height: '60px', color: 'black', borderRadius: '0 25px 0 0' }}>Azhar Nazli</span>
                                 </div>
                                 <div className="card-content" style={{ color: 'black', fontSize: '16px' }}>
                                     <p>I am a very simple card. I am good at containing small bits of information.</p>
@@ -38,11 +38,11 @@ export default class AboutUs extends Component {
                         <div className="col s3 m3" style={{ fontFamily: 'Arial' }}>
                             <div className="card yellow darken-1">
                                 <div className="card-image">
-                                    <img alt='memberphoto' src={require("../assets/team/reyhan.png")} style={{height:'300px'}} />
-                                    <span className="card-title" style={{backgroundColor: '#B0B0B0', opacity: '0.9', height: '60px', color: 'black', borderRadius: '0 25px 0 0'}}>Reyhan Huditama</span>
+                                    <img alt='memberphoto' src={require("../assets/team/reyhan.png")} style={{ height: '300px' }} />
+                                    <span className="card-title" style={{ backgroundColor: '#B0B0B0', opacity: '0.9', height: '60px', color: 'black', borderRadius: '0 25px 0 0' }}>Reyhan Huditama</span>
                                 </div>
                                 <div className="card-content" style={{ color: 'black', fontSize: '16px' }}>
-                                    <p>I am a very simple card. I am good at containing small bits of information.</p>
+                                    <p style={{ textAlign: 'justify' }}>Food Science & Technology graduate with high interest in modern technology and programming.</p>
                                 </div>
                                 <div className="card-action">
                                     <a href="https://www.linkedin.com/in/reyhan-huditama/" target="_blank" rel="noopener noreferrer" style={{ color: '#003399', fontSize: '24px' }}><span role='img' aria-label="logo"><img alt="linkedinlogo" src={require("../assets/linkedinlogo.png")} style={{ height: '30px' }}></img></span> LinkedIn</a>
@@ -53,11 +53,11 @@ export default class AboutUs extends Component {
                         <div className="col s3 m3" style={{ fontFamily: 'Arial' }}>
                             <div className="card yellow darken-1">
                                 <div className="card-image">
-                                    <img alt='memberphoto' src={require("../assets/team/william.png")} style={{height:'300px'}} />
-                                    <span className="card-title" style={{backgroundColor: '#B0B0B0', opacity: '0.9', height: '60px', color: 'black', borderRadius: '0 25px 0 0'}}>William Suryawan</span>
+                                    <img alt='memberphoto' src={require("../assets/team/william.png")} style={{ height: '300px' }} />
+                                    <span className="card-title" style={{ backgroundColor: '#B0B0B0', opacity: '0.9', height: '60px', color: 'black', borderRadius: '0 25px 0 0' }}>William Suryawan</span>
                                 </div>
                                 <div className="card-content" style={{ color: 'black', fontSize: '16px' }}>
-                                    <p>Former Founder of a TOP100 Southeast Asia Startup. A serial enterpreneur and ex-management consultant with technical knowledge in programming.</p>
+                                    <p style={{ textAlign: 'justify' }} >Former Founder of a TOP100 Southeast Asia Startup. A serial enterpreneur and ex-management consultant with technical knowledge in programming.</p>
                                 </div>
                                 <div className="card-action">
                                     <a href="https://www.linkedin.com/in/williamsuryawan/" target="_blank" rel="noopener noreferrer" style={{ color: '#003399', fontSize: '24px' }}><span role='img' aria-label="logo"><img alt="linkedinlogo" src={require("../assets/linkedinlogo.png")} style={{ height: '30px' }}></img></span> LinkedIn</a>
@@ -68,8 +68,8 @@ export default class AboutUs extends Component {
                         <div className="col s3 m3" style={{ fontFamily: 'Arial' }}>
                             <div className="card yellow darken-1">
                                 <div className="card-image">
-                                    <img alt='memberphoto' src={require("../assets/team/willy.png")}  style={{height:'300px'}}/>
-                                    <span className="card-title" style={{backgroundColor: '#B0B0B0', opacity: '0.9', height: '60px', color: 'black', borderRadius: '0 25px 0 0'}}>Willy Prayogo</span>
+                                    <img alt='memberphoto' src={require("../assets/team/willy.png")} style={{ height: '300px' }} />
+                                    <span className="card-title" style={{ backgroundColor: '#B0B0B0', opacity: '0.9', height: '60px', color: 'black', borderRadius: '0 25px 0 0' }}>Willy Prayogo</span>
                                 </div>
                                 <div className="card-content" style={{ color: 'black', fontSize: '16px' }}>
                                     <p>I am a very simple card. I am good at containing small bits of information.</p>
@@ -83,18 +83,18 @@ export default class AboutUs extends Component {
                     </div>
                 </div>
                 <div className="row" style={{ marginTop: '20px' }}>
-                    <div className="col s12 m12" > 
+                    <div className="col s12 m12" >
                         <h2 className="header" style={{ justifyContent: 'left' }}>Technology Behind Motion Slayer</h2>
                         <h4 className="header" style={{ justifyContent: 'left' }}> Machine Learning </h4>
                         <img alt='techlogo' src={require("../assets/logo/tensorflow-logo.png")} style={{ height: '50px' }} />
                     </div>
-                    <div className="col s4 m4" style={{color: 'orange'}}>
+                    <div className="col s4 m4" style={{ color: 'orange' }}>
                         <h4 className="header" style={{ justifyContent: 'left' }}> MobileNet</h4>
                     </div>
-                    <div className="col s4 m4" style={{color: 'orange'}}>
+                    <div className="col s4 m4" style={{ color: 'orange' }}>
                         <h4 className="header" style={{ justifyContent: 'left' }}> K-Nearest Neighbors</h4>
                     </div>
-                    <div className="col s4 m4" style={{color: 'orange'}}>
+                    <div className="col s4 m4" style={{ color: 'orange' }}>
                         <h4 className="header" style={{ justifyContent: 'left' }}> Speech Command</h4>
                     </div>
                 </div>
